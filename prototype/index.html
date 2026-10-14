@@ -112,9 +112,9 @@
       <div class="eyebrow">01 / YOUR IDEA</div>
       <h2 id="input-title">思いついたことを書いてみる</h2>
       <label for="idea">アイデア（必須）</label>
-      <textarea id="idea" maxlength="1200" placeholder="例：町内会のお知らせが紙とLINEに分かれていて、必要な情報を見逃しやすい。"></textarea>
+      <textarea id="idea" maxlength="1200" autocomplete="off" placeholder="例：町内会のお知らせが紙とLINEに分かれていて、必要な情報を見逃しやすい。"></textarea>
       <p class="hint">一文でも箇条書きでもOK。個人情報や会社の機密情報は入力しないでください。最大1,200文字。</p>
-      <div class="examples" aria-label="入力例">
+      <div class="examples" role="group" aria-label="入力例">
         <button class="example" type="button" data-example="町内会のお知らせが紙とLINEに分かれていて、必要な情報を見逃しやすい。">地域の困りごと</button>
         <button class="example" type="button" data-example="職場の引き継ぎが口頭中心で、担当者が休むと仕事が止まりやすい。">仕事の改善</button>
         <button class="example" type="button" data-example="釣り場ごとの風や波、釣果メモを一か所で振り返れるようにしたい。">趣味のアイデア</button>
@@ -124,7 +124,7 @@
         <button id="organize" class="btn primary" type="button">アイデアを整理する ↗</button>
         <button id="clear" class="btn secondary" type="button">入力を消す</button>
       </div>
-      <div id="input-error" class="error" role="alert" aria-live="polite"></div>
+      <div id="input-error" class="error" role="alert"></div>
     </section>
 
     <section id="result" class="panel" aria-labelledby="result-title" hidden>
@@ -139,27 +139,27 @@
       <div class="grid">
         <div class="field full">
           <label for="summary">アイデアの要約（入力内容）</label>
-          <textarea id="summary"></textarea>
+          <textarea id="summary" autocomplete="off"></textarea>
         </div>
         <div class="field">
           <label for="problem">解決したい課題</label>
-          <textarea id="problem" placeholder="何が不便・困りごとなのか？"></textarea>
+          <textarea id="problem" autocomplete="off" placeholder="何が不便・困りごとなのか？"></textarea>
         </div>
         <div class="field">
           <label for="audience">役立ちそうな人・場面</label>
-          <textarea id="audience" placeholder="誰が、どんな場面で困っている？"></textarea>
+          <textarea id="audience" autocomplete="off" placeholder="誰が、どんな場面で困っている？"></textarea>
         </div>
         <div class="field">
           <label for="solution">考えられる解決案（仮説）</label>
-          <textarea id="solution" placeholder="どうなれば少し良くなりそう？"></textarea>
+          <textarea id="solution" autocomplete="off" placeholder="どうなれば少し良くなりそう？"></textarea>
         </div>
         <div class="field">
           <label for="known">入力から分かっていること</label>
-          <textarea id="known" placeholder="入力に書かれた事実だけを整理する"></textarea>
+          <textarea id="known" autocomplete="off" placeholder="入力に書かれた事実だけを整理する"></textarea>
         </div>
         <div class="field full">
           <label for="unknown">まだ分からないこと・次に確かめたいこと</label>
-          <textarea id="unknown" placeholder="例：同じことで困っている人はいる？ 今の方法の何が一番不便？"></textarea>
+          <textarea id="unknown" autocomplete="off" placeholder="例：同じことで困っている人はいる？ 今の方法の何が一番不便？"></textarea>
         </div>
       </div>
       <div class="actions">
@@ -184,6 +184,9 @@
       const copyStatus = document.getElementById('copy-status');
       const fields = ['summary', 'problem', 'audience', 'solution', 'known', 'unknown'];
       const get = (id) => document.getElementById(id);
+      const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let generated = null; // 直近にテンプレートが作った内容。手動編集の有無の判定にだけ使う（メモリ内のみ）
+      const snapshot = () => fields.map((id) => get(id).value).join('\u0000');
 
       document.querySelectorAll('[data-example]').forEach((button) => {
         button.addEventListener('click', () => {
@@ -201,15 +204,20 @@
           idea.focus();
           return;
         }
+        if (!result.hidden && generated !== null && snapshot() !== generated &&
+            !window.confirm('編集した内容は上書きされます。もう一度整理しますか？')) {
+          return;
+        }
         get('summary').value = value;
         get('problem').value = '';
         get('audience').value = '';
         get('solution').value = '';
         get('known').value = '入力内容：\n' + value;
         get('unknown').value = '・同じ課題を感じている人はいる？\n・今はどんな方法で対応している？\n・最初に試せる小さな改善は？';
+        generated = snapshot();
         result.hidden = false;
         copyStatus.textContent = '';
-        result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        result.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
         get('summary').focus({ preventScroll: true });
       });
 
@@ -221,6 +229,7 @@
 
       get('restart').addEventListener('click', () => {
         fields.forEach((id) => { get(id).value = ''; });
+        generated = null;
         result.hidden = true;
         idea.value = '';
         error.textContent = '';
@@ -248,10 +257,14 @@
           const area = document.createElement('textarea');
           area.value = text;
           area.setAttribute('aria-label', 'コピー用の整理メモ');
+          area.setAttribute('autocomplete', 'off');
+          area.style.cssText = 'position:fixed;top:0;left:-9999px;opacity:0;';
           document.body.appendChild(area);
           area.select();
-          const ok = document.execCommand('copy');
+          let ok = false;
+          try { ok = document.execCommand('copy'); } catch (_) { ok = false; }
           area.remove();
+          get('copy').focus({ preventScroll: true });
           copyStatus.textContent = ok
             ? '整理メモをコピーしました。'
             : '自動コピーできませんでした。項目を選択して手動でコピーしてください。';

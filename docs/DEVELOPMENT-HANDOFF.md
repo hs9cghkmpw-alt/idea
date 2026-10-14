@@ -38,6 +38,9 @@ Static source checks were previously recorded for no external requests, no fetch
 
 The LP and prototype have not been confirmed deployed. Do not treat GitHub source links as a running preview. Do not attempt to make the repository public or deploy it without approval.
 
+### Issue #2 quality-check status (2026-10-15)
+Source review, `node scripts/static-check.mjs`, and a jsdom DOM simulation were run; **no real-browser or device testing has been done**. Findings, fixes, unverified risks and the manual test procedure are in [`QA-REPORT-ISSUE-2.md`](QA-REPORT-ISSUE-2.md).
+
 ## 4. Decisions and safety gates
 - Free/zero-cost first; do not introduce billable services, paid APIs, auto-billing, or credit-card requirements without explicit approval.
 - Do not build payment, money transfer, investment/lending intermediation, or transaction fees in the initial scope.

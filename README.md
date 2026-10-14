@@ -63,6 +63,7 @@ Claudeに開発を依頼する際は、まず上記2ファイルと、以下の�
 
 ## 実装引き継ぎ資料
 
+- [Issue #2 品質確認レポート](docs/QA-REPORT-ISSUE-2.md)：LP・試作の確認結果、修正内容、未検証項目、実ブラウザ手動テスト手順
 - [MVP仕様・受入基準](docs/MVP-SPEC-AND-ACCEPTANCE-CRITERIA.md)：実装範囲と合格条件
 - [技術構成・実装バックログ](docs/TECHNICAL-ARCHITECTURE-AND-IMPLEMENTATION-PLAN.md)：段階的な技術方針、P0〜P4タスク、ローカル試作の手動テスト
 - [データモデル・プライバシー脅威モデル](docs/DATA-MODEL-AND-PRIVACY-THREAT-MODEL.md)：認可、公開同意、データ最小化、脅威対策、リリースゲート

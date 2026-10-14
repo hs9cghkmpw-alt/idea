@@ -47,6 +47,7 @@
 ## 実装引き継ぎ資料
 
 - [MVP仕様・受入基準](docs/MVP-SPEC-AND-ACCEPTANCE-CRITERIA.md)：実装範囲と合格条件
+- [データモデル・プライバシー脅威モデル](docs/DATA-MODEL-AND-PRIVACY-THREAT-MODEL.md)：認可、公開同意、データ最小化、脅威対策、リリースゲート
 - [初回体験・画面仕様](docs/FIRST-USE-UX-SPEC.md)：LPから一文入力、整理結果、次の行動まで
 - [初期ユーザーヒアリングガイド](docs/INITIAL-USER-INTERVIEW-GUIDE.md)：LPの理解度と需要を確かめる質問・記録方法
 - [初期利用体験・利用者獲得戦略](docs/INITIAL-USER-EXPERIENCE-AND-GROWTH.md)：利用者層を広く維持する方針

@@ -21,7 +21,7 @@ Current repository separation is by directory only. A dedicated app repository i
 
 ## 3. User groups
 
-- Visitor: browse public ideas and understand the service.
+- Visitor: access the separate public promotional site; cannot browse product-app ideas until authenticated.
 - Member: create and manage ideas, save/bookmark, interact with supported features.
 - Creator: optionally configure paid content or membership, if/when monetization ships.
 - Matching participant: express interest and approve/decline a proposed match.
@@ -49,7 +49,7 @@ The browser must not be trusted to enforce permissions, prices, payment status, 
 ## 5. Core functional domains
 
 ### A. Discovery
-- Public feed
+- Authenticated-member feed
 - Search and category filtering
 - Idea detail page
 - Basic sort order; advanced ranking deferred until there is usage data
@@ -115,8 +115,8 @@ The browser must not be trusted to enforce permissions, prices, payment status, 
 ### Stage 0 — Static prototype
 Current state: front-end demonstration only. No real accounts, server persistence, production permissions, AI, payment, identity verification, or actual matching unless specifically implemented and tested.
 
-### Stage 1 — Web MVP
-A responsive Web client, a small application API, a relational database, and managed authentication/storage only where needed. Start with the smallest core experience that can validate discovery and publishing.
+### Stage 1 — Account-based Web MVP
+A responsive Web client, application API, relational database, and managed authentication/storage where needed. Login is required for all product browsing. Design and scope posting/browsing, Free Studio, paid content, and matching together; activate cost-heavy or legally sensitive integrations only after their release gates pass.
 
 ### Stage 2 — Optional services
 Add Studio AI, paid content, notifications, and matching only after requirements, cost limits, and policy controls are defined.
@@ -144,35 +144,27 @@ Avoid introducing a complex monorepo, microservices, or native app framework bef
 
 ## 10. MVP recommendation
 
-Recommended initial scope to validate PON's core value:
-1. Public idea feed and idea detail
-2. Search/category filtering
-3. Create/edit draft and publish an idea
-4. Explicit visibility choice, with server-enforced rules when backend exists
-5. Basic report/moderation workflow
-6. Free template-based Studio as an optional aid
+Confirmed design scope for the initial product:
+1. Account-only access, including browsing
+2. Idea feed, search/category filtering, create/edit draft, publish, and visibility enforcement
+3. Free template-based Studio
+4. Paid-content preview, purchase, entitlement, refund, and creator-accounting design
+5. Structured matching requests, mutual consent, and contact-disclosure rules
+6. Report/block/moderation, account deletion, and audit requirements
 7. Responsive mobile-browser layout
 
-Defer until separately designed:
-- Real payments and paid content
-- Real AI integration
-- Real matching/contact unlock
-- Identity verification
-- Native mobile apps
-- Advanced recommendations and analytics
+Real payments, paid AI, identity verification, and real matching must not be activated until their cost, provider, safety, and legal gates are satisfied. Design them now; estimate operating costs before deciding implementation order. Native mobile apps and advanced recommendations remain later enhancements.
 
-This is a recommendation for review, not a final scope approval.
+## 11. Decisions required before implementation freeze
 
-## 11. Decisions required before detailed design
-
-1. First release: public read-only access or require login to browse?
-2. Visibility modes and who can see each mode.
-3. MVP scope: whether Studio and matching are included in the first backend release or remain prototype-only.
-4. Whether paid content is an early requirement or later phase.
-5. Moderation, reporting, blocking, deletion, and appeal rules.
-6. Account deletion and data retention policy.
-7. App repository creation and deployment target.
-8. Expected initial traffic and maximum acceptable monthly operating cost.
+1. Exact visibility modes and Limited-grant semantics.
+2. Authentication provider, email verification, session expiry, and recovery policy.
+3. Paid-content model, fee/creator share, refunds, payout, tax handling, and provider.
+4. Matching launch gate, categories enabled, verification trigger, and contact disclosure.
+5. Moderation, reporting, blocking, deletion, retention, and appeals policy.
+6. App repository creation, deployment target, and backend provider choices.
+7. Initial traffic assumptions and maximum acceptable monthly operating cost.
+8. Studio artifact storage and whether one idea supports multiple paid sections.
 
 ## 12. Acceptance principle
 

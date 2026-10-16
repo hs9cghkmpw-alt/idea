@@ -12,7 +12,6 @@ on:
   push:
     branches:
       - main
-      - feat/pon-authenticated-mvp
     paths:
       - "app/mvp/**"
       - ".github/workflows/pon-mvp-build.yml"

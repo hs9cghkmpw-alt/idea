@@ -25,6 +25,7 @@ let authMode = 'login';
 let currentUser = null;
 let ideas = [];
 let busy = false;
+let recoveryMode = false;
 
 function message(element, text = '', type = '') {
   element.textContent = text;
@@ -44,12 +45,14 @@ function setAuthMode(mode) {
   $('tab-signup').setAttribute('aria-selected', String(mode === 'signup'));
   $('auth-submit').textContent = mode === 'login' ? 'ログイン' : 'アカウントを作成';
   $('auth-password').autocomplete = mode === 'login' ? 'current-password' : 'new-password';
+  $('forgot-password').hidden = mode !== 'login';
   message(authMessage);
 }
 function showApp(user) {
   currentUser = user ?? null;
   authView.hidden = Boolean(user);
   appView.hidden = !user;
+  $('recovery-view').hidden = true;
   $('sign-out').hidden = !user;
   $('session-label').textContent = user ? user.email : '未ログイン';
   if (!user) {
@@ -57,6 +60,17 @@ function showApp(user) {
     ideaFeed.replaceChildren();
     closeEditor();
   }
+}
+function showRecovery(user = null) {
+  recoveryMode = true;
+  if (user) currentUser = user;
+  authView.hidden = true;
+  appView.hidden = true;
+  $('recovery-view').hidden = false;
+  $('sign-out').hidden = true;
+  $('session-label').textContent = 'パスワード再設定';
+  message($('recovery-message'));
+  $('new-password').focus();
 }
 function safeText(tag, className, text) {
   const node = document.createElement(tag);
@@ -229,6 +243,56 @@ authForm.addEventListener('submit', async (event) => {
     setBusy(false);
   }
 });
+$('forgot-password').addEventListener('click', async () => {
+  if (!supabase || busy) return;
+  const email = $('auth-email').value.trim();
+  if (!email || !$('auth-email').checkValidity()) {
+    message(authMessage, '先に有効なメールアドレスを入力してください。', 'error');
+    $('auth-email').focus();
+    return;
+  }
+  setBusy(true);
+  message(authMessage, '再設定メールを送信しています…');
+  try {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + window.location.pathname
+    });
+    if (error) throw error;
+    message(authMessage, '再設定メールを送信しました。受信箱を確認してください。登録の有無にかかわらず、案内が表示されます。', 'success');
+  } catch (error) {
+    message(authMessage, '再設定メールを送信できませんでした。時間をおいて再試行してください。' + (import.meta.env.DEV ? ' (' + error.message + ')' : ''), 'error');
+  } finally {
+    setBusy(false);
+  }
+});
+$('recovery-form').addEventListener('submit', async (event) => {
+  event.preventDefault();
+  if (!supabase || busy) return;
+  const password = $('new-password').value;
+  const confirmation = $('confirm-password').value;
+  if (password.length < 8 || password.length > 128) {
+    message($('recovery-message'), 'パスワードは8〜128文字で入力してください。', 'error');
+    return;
+  }
+  if (password !== confirmation) {
+    message($('recovery-message'), '確認用パスワードが一致しません。', 'error');
+    return;
+  }
+  setBusy(true);
+  message($('recovery-message'), 'パスワードを更新しています…');
+  try {
+    const { data, error } = await supabase.auth.updateUser({ password });
+    if (error) throw error;
+    recoveryMode = false;
+    showApp(data.user);
+    message(feedMessage, 'パスワードを更新しました。', 'success');
+    await loadIdeas();
+  } catch (error) {
+    message($('recovery-message'), 'パスワードを更新できませんでした。メールのリンクが期限切れの場合は、再設定メールをもう一度送信してください。' + (import.meta.env.DEV ? ' (' + error.message + ')' : ''), 'error');
+  } finally {
+    setBusy(false);
+  }
+});
 $('tab-login').addEventListener('click', () => setAuthMode('login'));
 $('tab-signup').addEventListener('click', () => setAuthMode('signup'));
 $('sign-out').addEventListener('click', async () => {
@@ -256,7 +320,16 @@ if (!configured) {
   setupWarning.hidden = false;
   authForm.querySelectorAll('input,button').forEach((el) => { el.disabled = true; });
 } else {
-  supabase.auth.onAuthStateChange((_event, session) => {
+  supabase.auth.onAuthStateChange((event, session) => {
+    if (event === 'PASSWORD_RECOVERY') {
+      showRecovery(session?.user ?? null);
+      return;
+    }
+    if (recoveryMode && event !== 'USER_UPDATED') {
+      showRecovery(session?.user ?? null);
+      return;
+    }
+    if (event === 'USER_UPDATED') recoveryMode = false;
     showApp(session?.user ?? null);
     if (session?.user) queueMicrotask(() => loadIdeas());
   });

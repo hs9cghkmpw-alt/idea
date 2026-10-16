@@ -10,7 +10,7 @@ create table if not exists public.ideas (
   title text not null check (char_length(btrim(title)) between 1 and 120),
   summary text not null check (char_length(btrim(summary)) between 1 and 500),
   body text not null default '' check (char_length(body) <= 20000),
-  category text not null default 'その他' check (char_length(category) between 1 and 40),
+  category text not null default 'その他' check (category in ('暮らし', '仕事', '地域', 'テクノロジー', '教育', '環境', 'その他')),
   visibility text not null default 'community' check (visibility in ('community', 'private')),
   status text not null default 'draft' check (status in ('draft', 'published')),
   created_at timestamptz not null default now(),

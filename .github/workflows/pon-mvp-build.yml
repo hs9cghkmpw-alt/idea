@@ -1,0 +1,35 @@
+name: PON MVP build
+
+on:
+  pull_request:
+    paths:
+      - "app/mvp/**"
+      - ".github/workflows/pon-mvp-build.yml"
+  push:
+    branches:
+      - main
+      - feat/pon-authenticated-mvp
+    paths:
+      - "app/mvp/**"
+      - ".github/workflows/pon-mvp-build.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/mvp
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build
+        run: npm run build

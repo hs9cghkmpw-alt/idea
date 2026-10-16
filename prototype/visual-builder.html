@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="description" content="PONの構想を、模擬LPとして見える化するローカル試作です。">
+<title>PON Studio｜アイデアをLPにする試作</title>
+<style>
+:root{--ink:#20231f;--muted:#62675d;--paper:#f4f3ec;--white:#fffef9;--line:#d8dbd0;--lime:#d9f36a;--orange:#f28b55;--green:#d9e8d0;--blue:#dce8f5;--focus:#2857c5}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}button,input,textarea,select{font:inherit}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--focus);outline-offset:3px}.wrap{width:min(1380px,calc(100% - 36px));margin:auto}
+header{background:var(--ink);color:#fff;padding:17px 0}.head{display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{font-size:21px;font-weight:950;letter-spacing:-1px}.brand b{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--lime);color:var(--ink);margin-right:8px}.head small{color:#d1d4c9;font-size:12px}
+.intro{padding:30px 0 24px}.eyebrow{font-size:11px;font-weight:900;letter-spacing:1.5px;color:#5c6650}.intro h1{font-size:clamp(30px,4vw,48px);letter-spacing:-.06em;line-height:1.12;margin:8px 0}.intro p{color:#555a50;margin:10px 0 0;max-width:780px}
+.notice{background:#fff5d7;border:1px solid #e8d69c;padding:11px 14px;border-radius:8px;font-size:12px;margin:18px 0 24px}
+.workspace{display:grid;grid-template-columns:minmax(270px,350px) minmax(0,1fr);gap:20px;align-items:start;padding-bottom:54px}.controls{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px;position:sticky;top:14px}.controls h2{font-size:19px;margin:0 0 5px}.sub{font-size:12px;color:var(--muted);margin:0 0 18px}
+label{display:block;font-size:12px;font-weight:850;margin:14px 0 6px}input,textarea,select{width:100%;border:1px solid #bfc5b8;border-radius:7px;background:white;color:var(--ink);padding:10px 11px}textarea{min-height:76px;resize:vertical}.hint{font-size:11px;color:var(--muted);margin:5px 0}
+.palette{display:flex;gap:8px}.swatch{flex:1;min-width:0;border:1px solid #aeb4a7;border-radius:7px;background:white;padding:8px 4px;font-size:11px;cursor:pointer}.swatch[aria-pressed=true]{outline:2px solid var(--ink);outline-offset:2px}.swatch i{display:block;width:24px;height:16px;border-radius:4px;margin:0 auto 5px}.actions{display:grid;gap:8px;margin-top:20px}.btn{border:1px solid var(--ink);border-radius:7px;padding:11px 13px;font-size:13px;font-weight:850;cursor:pointer}.primary{background:var(--lime);color:var(--ink)}.secondary{background:white;color:var(--ink)}.btn:disabled{opacity:.5;cursor:not-allowed}
+.preview-area{min-width:0}.preview-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}.preview-top h2{font-size:16px;margin:0}.preview-top p{font-size:11px;color:var(--muted);margin:2px 0}.switch{display:flex;gap:5px}.switch button{border:1px solid #bfc5b8;border-radius:6px;background:#fff;padding:7px 10px;font-size:11px;font-weight:800;cursor:pointer}.switch button[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.site{--accent:var(--lime);--accent2:var(--orange);background:white;border:1px solid #d6d8cf;border-radius:10px;overflow:hidden;box-shadow:0 14px 40px #20231f12;transition:max-width .2s ease;max-width:none;margin:auto}.site.mobile{max-width:390px}.site-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:17px 22px;border-bottom:1px solid #ecece5}.site-logo{font-size:15px;font-weight:950;letter-spacing:-.5px}.site-logo span{display:inline-block;width:9px;height:9px;background:var(--accent2);border-radius:50%;margin-right:7px}.site-nav-links{display:flex;gap:15px;font-size:10px;color:#555b50}.site-nav-cta{background:var(--ink);color:#fff;border-radius:4px;padding:7px 10px;font-size:10px;font-weight:850;white-space:nowrap}
+.site-hero{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:center;padding:clamp(22px,4vw,46px);background:var(--hero-bg,#f4f2e8)}.site.mobile .site-hero{grid-template-columns:1fr;gap:20px}.site-kicker{font-size:10px;letter-spacing:1.4px;font-weight:950;color:#606657}.site-title{font-size:clamp(27px,3.6vw,49px);line-height:1.08;letter-spacing:-.07em;margin:12px 0}.site.mobile .site-title{font-size:35px}.site-desc{font-size:13px;line-height:1.8;color:#4f554b;max-width:490px}.site-cta{display:inline-block;margin-top:10px;background:var(--accent);color:var(--ink);padding:10px 14px;border-radius:4px;font-size:11px;font-weight:950}
+.art{min-width:0;position:relative;background:var(--art-bg,#dce8d5);border-radius:9px;min-height:250px;padding:16px;overflow:hidden}.site.mobile .art{min-height:220px}.art-window{background:#fffefb;border:1px solid #d5d8ce;border-radius:7px;padding:11px;box-shadow:0 12px 22px #20231f12;transform:rotate(2deg)}.art-dots{display:flex;gap:4px;margin-bottom:12px}.art-dots i{width:6px;height:6px;border-radius:50%;background:#c6cbbf}.art-main{height:70px;border-radius:5px;background:linear-gradient(120deg,var(--accent2) 0 38%,#f4d9a6 38% 63%,#667f5e 63%);position:relative;overflow:hidden}.art-main:after{content:"";position:absolute;width:100px;height:100px;border-radius:50%;background:#fff9;right:14px;top:20px}.art-lines{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:9px}.art-lines i{height:18px;background:#eceee5;border-radius:3px}.art-lines i:last-child{background:var(--accent);opacity:.8}.art-sticker{position:absolute;right:9px;bottom:12px;background:var(--accent);padding:10px 12px;border-radius:50%;font-size:10px;font-weight:950;transform:rotate(8deg);box-shadow:0 3px 0 #20231f15}
+.site-strip{padding:14px 22px;display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;border-bottom:1px solid #ecece5}.site-strip span{font-size:10px;font-weight:800;color:#5a6054}.site-features{padding:26px 22px 30px}.site-section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:15px}.site-section-head small{font-size:9px;font-weight:950;letter-spacing:1.3px;color:#697061}.site-section-head h3{font-size:22px;letter-spacing:-.05em;margin:3px 0 0}.feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.site.mobile .feature-grid{grid-template-columns:1fr}.feature{border:1px solid #e2e4dc;border-radius:7px;padding:13px;min-width:0}.feature-icon{display:grid;place-items:center;width:30px;height:30px;border-radius:7px;background:var(--accent);font-size:15px;margin-bottom:12px}.feature h4{font-size:12px;margin:0 0 5px}.feature p{font-size:10px;line-height:1.7;color:#64695e;margin:0}.site-bottom{background:var(--ink);color:#fff;padding:23px;display:flex;justify-content:space-between;gap:15px;align-items:center}.site-bottom strong{font-size:17px;line-height:1.3}.site-bottom span{font-size:10px;color:#d0d3c8}.preview-foot{font-size:11px;color:#686d62;margin:10px 0 0;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.empty-state{border:1px dashed #aeb5a7;border-radius:10px;padding:50px 20px;text-align:center;color:#555a50}.empty-state strong{display:block;font-size:19px;color:var(--ink);margin:10px 0}.empty-icon{font-size:38px}
+@media(max-width:900px){.workspace{grid-template-columns:1fr}.controls{position:static}.controls form{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}.controls .wide{grid-column:1/-1}.actions{grid-template-columns:1fr 1fr}.preview-area{min-width:0}}
+@media(max-width:560px){.wrap{width:calc(100% - 22px)}header{padding:13px 0}.head small{max-width:150px;text-align:right;font-size:10px}.intro{padding-top:23px}.workspace{gap:14px}.controls{padding:15px}.controls form{display:block}.site-nav{padding:12px}.site-nav-links{display:none}.site-hero{grid-template-columns:1fr;padding:23px 18px}.site-title{font-size:34px}.site-desc{font-size:12px}.art{min-height:205px}.site-strip{padding:12px 16px}.site-features{padding:22px 16px}.feature-grid{grid-template-columns:1fr}.site-bottom{align-items:flex-start;flex-direction:column}.preview-top{align-items:flex-start}.preview-top .switch{width:100%}.switch button{flex:1}.actions{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap head"><div class="brand"><b aria-hidden="true">P</b>PON STUDIO</div><small>アイデアを、見えるLPに。</small></div></header>
+<main class="wrap">
+<section class="intro"><div class="eyebrow">IDEA → VISUAL PROTOTYPE</div><h1>メモで終わらせない。<br>アイデアを、見せられる形に。</h1><p>アイデアを入力して「LPを生成」を押すと、見出し・説明・機能カード・ビジュアルを持つランディングページの試作ができます。完成品ではなく、発案者が構想を説明し、仲間を募るための見本です。</p></section>
+<div class="notice" role="note"><strong>ローカル試作：</strong>AI APIは接続していません。入力文をもとにブラウザ内のデザインテンプレートを組み立てます。内容は送信・保存されず、画像書き出しもこの端末内で処理します。</div>
+<div class="workspace">
+<aside class="controls">
+<h2>アイデアの設定</h2><p class="sub">ざっくり入力でOK。右側にLPの見本が出ます。</p>
+<form id="builder-form">
+<label for="idea-title">アイデアの名前</label><input id="idea-title" maxlength="80" value="まちの空席を、新しい体験に。" autocomplete="off">
+<label for="idea-description">どんなアイデア？</label><textarea id="idea-description" maxlength="500" autocomplete="off">地域のお店の空席や空き時間と、場所を探している人をつなぐ。お店は空き時間を活用でき、利用者は新しい場所や体験に出会える。</textarea>
+<label for="idea-audience">誰のため？</label><input id="idea-audience" maxlength="100" value="地域のお店・近くで場所を探す人" autocomplete="off">
+<label for="idea-benefit">一番のメリット</label><input id="idea-benefit" maxlength="100" value="空いている時間や場所を、価値に変える" autocomplete="off">
+<label for="idea-cta">協力してほしいこと</label><select id="idea-cta"><option>実証に協力してほしい</option><option>開発パートナーを探したい</option><option>出資・スポンサーを探したい</option><option>意見・アドバイスがほしい</option><option>一緒に事業化したい</option></select>
+<label>LPの雰囲気</label>
+<div class="palette" role="group" aria-label="LPの配色">
+<button class="swatch" type="button" data-theme="lime" aria-pressed="true"><i style="background:#d9f36a"></i>ポップ</button>
+<button class="swatch" type="button" data-theme="orange" aria-pressed="false"><i style="background:#ffad8e"></i>元気</button>
+<button class="swatch" type="button" data-theme="blue" aria-pressed="false"><i style="background:#b9d8ff"></i>クリーン</button>
+</div>
+<div class="actions wide"><button class="btn primary" id="generate" type="button">LPを生成・更新 ↗</button><button class="btn secondary" id="example" type="button">別のサンプルを試す</button></div>
+</form>
+<p class="hint">※ 自由な文章から本物のHTMLをAI生成する機能は、まだ未接続です。</p>
+</aside>
+<section class="preview-area" aria-labelledby="preview-heading">
+<div class="preview-top"><div><h2 id="preview-heading">生成されたLPのプレビュー</h2><p id="preview-status" role="status" aria-live="polite">サンプルLPを表示中。内容を編集して更新できます。</p></div><div class="switch" role="group" aria-label="プレビュー幅"><button type="button" data-view="desktop" aria-pressed="true">PC表示</button><button type="button" data-view="mobile" aria-pressed="false">スマホ表示</button></div></div>
+<div class="site" id="site-preview">
+<div class="site-nav"><div class="site-logo"><span aria-hidden="true"></span><span id="p-brand">空席ラボ</span></div><div class="site-nav-links"><span>サービス</span><span>使い方</span><span>私たちについて</span></div><div class="site-nav-cta" id="p-nav-cta">協力する ↗</div></div>
+<div class="site-hero"><div><div class="site-kicker">A NEW LOCAL EXPERIENCE</div><h2 class="site-title" id="p-title">まちの空席を、<br>新しい体験に。</h2><p class="site-desc" id="p-description">地域のお店の空席や空き時間と、場所を探している人をつなぐ。お店は空き時間を活用でき、利用者は新しい場所や体験に出会える。</p><span class="site-cta" id="p-cta">実証に協力してほしい ↗</span></div>
+<div class="art" aria-label="サービスのイメージイラスト"><div class="art-window"><div class="art-dots"><i></i><i></i><i></i></div><div class="art-main"></div><div class="art-lines"><i></i><i></i></div></div><div class="art-sticker">IDEA<br>IN ACTION</div></div></div>
+<div class="site-strip"><span>01　身近な課題から</span><span>02　小さく試せる</span><span>03　一緒に育てる</span></div>
+<div class="site-features"><div class="site-section-head"><div><small>WHY IT MATTERS</small><h3>こんな未来をつくりたい。</h3></div></div><div class="feature-grid"><article class="feature"><div class="feature-icon">↗</div><h4 id="p-feature1-title">空き時間を活用</h4><p id="p-feature1">今ある場所や資源を、もっと有効に使えるように。</p></article><article class="feature"><div class="feature-icon">◎</div><h4 id="p-feature2-title">新しい出会い</h4><p id="p-feature2">地域の人とお店が、これまでにない形でつながる。</p></article><article class="feature"><div class="feature-icon">＋</div><h4 id="p-feature3-title">仲間を募る</h4><p id="p-feature3">構想に共感する人と、最初の一歩を一緒に。</p></article></div></div>
+<div class="site-bottom"><strong id="p-bottom-title">このアイデアを、一緒に育てませんか？</strong><span id="p-bottom-copy">構想段階のコンセプトLP / デモ表示</span></div>
+</div>
+<div class="preview-foot"><span>※ 生成された見本です。実サービス・実際の募集ではありません。</span><span>テキストとレイアウトの概念プレビュー</span></div>
+<div class="actions" style="grid-template-columns:1fr 1fr;margin-top:14px"><button type="button" class="btn primary" id="download-svg">このLPを画像で保存（SVG）</button><button type="button" class="btn secondary" id="copy-summary">アイデア概要をコピー</button></div>
+<p class="hint" id="export-status" role="status" aria-live="polite"></p>
+</section>
+</div>
+</main>
+<script>
+(() => {
+const $ = id => document.getElementById(id);
+const fields = ['idea-title','idea-description','idea-audience','idea-benefit','idea-cta'];
+let theme = 'lime';
+const themes = {
+ lime:{accent:'#d9f36a',accent2:'#f28b55',hero:'#f4f2e8',art:'#dce8d5'},
+ orange:{accent:'#ffad8e',accent2:'#d96b43',hero:'#fff0e8',art:'#f5d5c4'},
+ blue:{accent:'#b9d8ff',accent2:'#547ca8',hero:'#eef5ff',art:'#dce8f5'}
+};
+const safeText = value => String(value || '').replace(/[\r\n\t ]+/g,' ').trim();
+const setText = (id,value) => { $(id).textContent = value; };
+function update(){
+ const title = safeText($('idea-title').value) || 'あなたのアイデアを、形に。';
+ const description = safeText($('idea-description').value) || 'このアイデアで解決したいことや、実現したい未来を紹介します。';
+ const audience = safeText($('idea-audience').value) || 'このアイデアを必要としている人';
+ const benefit = safeText($('idea-benefit').value) || '今ある課題を、新しい価値に変える';
+ const cta = $('idea-cta').value;
+ setText('p-brand',title.replace(/[。！!？?].*$/,'').slice(0,18) || 'IDEA PROJECT');
+ setText('p-title',title);
+ setText('p-description',description);
+ setText('p-cta',cta+' ↗');
+ setText('p-nav-cta','参加する ↗');
+ setText('p-feature1-title','こんな人に届けたい');
+ setText('p-feature1',audience+'に向けた、新しい選択肢。');
+ setText('p-feature2-title','届けたい価値');
+ setText('p-feature2',benefit+'。');
+ setText('p-feature3-title','一緒に実現する');
+ setText('p-feature3',cta+'。');
+ setText('p-bottom-title','このアイデアを、一緒に育てませんか？');
+ setText('p-bottom-copy','構想段階のコンセプトLP / デモ表示');
+ const t = themes[theme];
+ const site = $('site-preview');
+ site.style.setProperty('--accent',t.accent);
+ site.style.setProperty('--accent2',t.accent2);
+ site.style.setProperty('--hero-bg',t.hero);
+ site.style.setProperty('--art-bg',t.art);
+ $('preview-status').textContent='LPを更新しました。タイトル・説明・カードがプレビューに反映されています。';
+}
+$('generate').addEventListener('click',update);
+document.querySelectorAll('[data-theme]').forEach(btn=>btn.addEventListener('click',()=>{
+ theme=btn.dataset.theme;
+ document.querySelectorAll('[data-theme]').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));
+ update();
+}));
+document.querySelectorAll('[data-view]').forEach(btn=>btn.addEventListener('click',()=>{
+ const mobile=btn.dataset.view==='mobile';
+ $('site-preview').classList.toggle('mobile',mobile);
+ document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));
+}));
+$('example').addEventListener('click',()=>{
+ $('idea-title').value='釣り場の情報を、もっとわかりやすく。';
+ $('idea-description').value='釣り場ごとの風や波、混雑、釣果メモを一か所で確認。初心者も安全に釣り場を選び、経験者は記録を振り返れるサービス。';
+ $('idea-audience').value='釣り初心者・釣り場の情報を共有したい人';
+ $('idea-benefit').value='出発前の不安を減らし、釣行の記録を次に生かす';
+ $('idea-cta').value='開発パートナーを探したい';
+ update();
+});
+$('copy-summary').addEventListener('click',async()=>{
+ const text=fields.map(id=>$(id).previousElementSibling.textContent+'：'+$(id).value).join('\n');
+ try{await navigator.clipboard.writeText(text);$('export-status').textContent='アイデア概要をコピーしました。';}
+ catch(_){$('export-status').textContent='クリップボードへのアクセスが拒否されました。入力欄から手動でコピーしてください。';}
+});
+$('download-svg').addEventListener('click',()=>{
+ const esc = value => String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');
+ const t=themes[theme];
+ const title=esc(safeText($('idea-title').value)||'あなたのアイデアを、形に。');
+ const desc=esc(safeText($('idea-description').value)||'アイデアの紹介');
+ const audience=esc(safeText($('idea-audience').value)||'想定する利用者');
+ const benefit=esc(safeText($('idea-benefit').value)||'届けたい価値');
+ const cta=esc($('idea-cta').value);
+ const line=(str,max)=>str.length>max?str.slice(0,max-1)+'…':str;
+ const svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900"><rect width="1200" height="900" fill="#ffffff"/><rect width="1200" height="74" fill="#20231f"/><circle cx="58" cy="37" r="17" fill="'+t.accent+'"/><text x="88" y="45" font-family="sans-serif" font-size="23" font-weight="800" fill="#ffffff">PON / IDEA CONCEPT</text><text x="70" y="132" font-family="sans-serif" font-size="16" font-weight="700" letter-spacing="3" fill="#62675d">A NEW IDEA, MADE VISIBLE</text><rect x="0" y="160" width="1200" height="420" fill="'+t.hero+'"/><text x="70" y="235" font-family="sans-serif" font-size="45" font-weight="800" fill="#20231f">'+line(title,30)+'</text><foreignObject x="70" y="270" width="550" height="125"><div xmlns="http://www.w3.org/1999/xhtml" style="font:20px/1.6 sans-serif;color:#4f554b">'+line(desc,130)+'</div></foreignObject><rect x="70" y="430" width="260" height="58" rx="7" fill="'+t.accent+'"/><text x="92" y="466" font-family="sans-serif" font-size="17" font-weight="800" fill="#20231f">'+cta+'</text><rect x="700" y="215" width="410" height="270" rx="18" fill="'+t.art+'"/><rect x="750" y="260" width="310" height="190" rx="12" fill="#fffefb" stroke="#d5d8ce"/><rect x="770" y="285" width="270" height="90" rx="8" fill="'+t.accent2+'"/><circle cx="1000" cy="350" r="45" fill="'+t.accent+'" opacity=".9"/><rect x="770" y="393" width="125" height="12" rx="6" fill="#d8dbd0"/><rect x="905" y="393" width="135" height="12" rx="6" fill="#d8dbd0"/><text x="70" y="650" font-family="sans-serif" font-size="30" font-weight="800" fill="#20231f">このアイデアが届けたい価値</text><rect x="70" y="690" width="510" height="115" rx="12" fill="#f4f3ec" stroke="#d8dbd0"/><text x="100" y="730" font-family="sans-serif" font-size="16" font-weight="800" fill="#20231f">誰のため？</text><foreignObject x="100" y="745" width="440" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="font:15px/1.5 sans-serif;color:#555a50">'+audience+'</div></foreignObject><rect x="610" y="690" width="520" height="115" rx="12" fill="#f4f3ec" stroke="#d8dbd0"/><text x="640" y="730" font-family="sans-serif" font-size="16" font-weight="800" fill="#20231f">届けたい価値</text><foreignObject x="640" y="745" width="455" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="font:15px/1.5 sans-serif;color:#555a50">'+benefit+'</div></foreignObject><text x="70" y="860" font-family="sans-serif" font-size="14" fill="#62675d">CONCEPT MOCKUP • AI GENERATION NOT CONNECTED • NOT A LIVE SERVICE</text></svg>';
+ const blob=new Blob([svg],{type:'image/svg+xml;charset=utf-8'});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement('a');a.href=url;a.download='pon-idea-preview.svg';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+ $('export-status').textContent='SVG画像を書き出しました。ブラウザ内で生成し、外部送信はしていません。';
+});
+update();
+})();
+</script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import './style.css';
+import { validateIdeaInput } from './idea-rules.js';
 
 const config = {
   url: import.meta.env.VITE_SUPABASE_URL?.trim(),
@@ -153,12 +154,13 @@ async function saveIdea(status) {
   const title = $('idea-title').value.trim();
   const summary = $('idea-summary').value.trim();
   const body = $('idea-body').value.trim();
-  if (!title || !summary) {
-    message(ideaMessage, 'タイトルと概要を入力してください。', 'error');
-    return;
-  }
-  if (title.length > 120 || summary.length > 500 || body.length > 20000) {
-    message(ideaMessage, '入力文字数が上限を超えています。', 'error');
+  const validationError = validateIdeaInput({
+    title, summary, body,
+    category: $('idea-category').value,
+    visibility: $('idea-visibility').value
+  });
+  if (validationError) {
+    message(ideaMessage, validationError, 'error');
     return;
   }
   const id = $('idea-id').value;

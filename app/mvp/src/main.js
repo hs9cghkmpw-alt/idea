@@ -64,6 +64,8 @@ function showApp(user) {
     $('detail-summary').textContent = '';
     $('detail-body').textContent = '';
     closeEditor();
+    $('studio-panel').hidden = true;
+    resetStudio();
   }
 }
 function showRecovery(user = null) {

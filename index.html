@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171914">
+  <meta name="description" content="一文の思いつきからでいい。PONは、頭の中のアイデアを見える形にし、可能性を探るためのサービスを開発中です。">
+  <title>PON — 思いついたら、ポン。</title>
+  <style>
+    :root{--ink:#171914;--paper:#f5f3e9;--white:#fffdf6;--muted:#686b60;--lime:#d8fb58;--orange:#ff795d;--line:#dedccf;--darkline:#41443a;--max:1160px}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;line-height:1.7}
+    a{color:inherit} a,button{-webkit-tap-highlight-color:transparent}
+    .wrap{width:min(var(--max),calc(100% - 48px));margin-inline:auto}
+    .top{background:var(--ink);color:var(--paper);overflow:hidden}
+    header{height:78px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--darkline)}
+    .logo{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:950;font-size:25px;letter-spacing:-1.6px}
+    .logo-mark{width:29px;height:29px;background:var(--lime);border-radius:50%;display:inline-grid;place-items:center;color:var(--ink);font-size:18px;font-weight:1000;line-height:1}
+    .logo-mark:after{content:"P"}
+    nav{display:flex;align-items:center;gap:25px;font-size:12px;color:#d3d4ca}
+    nav a{text-decoration:none}nav a:hover{color:var(--lime)}
+    .nav-cta{border:1px solid #77796d;padding:9px 15px;border-radius:4px;color:#fff}
+    .status{display:inline-flex;align-items:center;gap:8px;border:1px solid #55584b;border-radius:99px;padding:7px 11px;font-size:10px;letter-spacing:.04em;color:#e2e4d8}
+    .status i{width:7px;height:7px;background:var(--lime);border-radius:50%;display:inline-block}
+    .hero{padding:68px 0 52px;display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}
+    .eyebrow{display:flex;align-items:center;gap:9px;color:var(--lime);font-size:11px;letter-spacing:1.8px;font-weight:900;text-transform:uppercase}
+    .eyebrow:before{content:"";width:24px;height:2px;background:var(--lime)}
+    h1{font-size:clamp(48px,6.5vw,82px);line-height:1.08;letter-spacing:-.075em;margin:21px 0 23px;font-weight:1000}
+    h1 .lime{color:var(--lime)}h1 .underline{color:var(--paper);text-decoration:underline;text-decoration-color:var(--orange);text-decoration-thickness:6px;text-underline-offset:8px}
+    .hero-copy{font-size:16px;color:#c6c8bd;max-width:485px;line-height:1.95;margin:0}
+    .hero-copy strong{color:#fff}
+    .actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:28px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;text-decoration:none;padding:13px 18px;border-radius:4px;font-size:13px;font-weight:900;transition:transform .18s,background .18s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-lime{background:var(--lime);color:var(--ink)}.btn-lime:hover{background:#e5ff8a}
+    .btn-line{border:1px solid #66695d;color:#fff}
+    .micro{font-size:11px;color:#9da094;margin-top:13px}
+    .visual{position:relative;min-height:430px;display:grid;place-items:center}
+    .orbit{position:absolute;width:370px;height:370px;border:1px solid #393c32;border-radius:50%}
+    .orbit:before,.orbit:after{content:"";position:absolute;inset:27px;border:1px dashed #44473d;border-radius:50%}.orbit:after{inset:65px}
+    .scribble-card{position:absolute;z-index:3;left:0;top:26px;width:190px;background:var(--white);color:var(--ink);padding:14px 16px;transform:rotate(-5deg);box-shadow:7px 8px 0 #0005}
+    .scribble-card small{font-size:9px;letter-spacing:1px;color:#73766a;font-weight:900}
+    .scribble-card b{display:block;font-size:20px;line-height:1.3;letter-spacing:-.7px;margin-top:8px}
+    .scribble-card b span{color:#ed654b}
+    .scribble-card svg{margin-top:4px}
+    .mock{position:relative;z-index:2;width:min(390px,94%);background:var(--paper);color:var(--ink);border-radius:9px;overflow:hidden;transform:rotate(2deg);box-shadow:0 25px 65px #0009}
+    .mockbar{height:32px;background:#e5e3d8;display:flex;align-items:center;gap:5px;padding:0 12px}
+    .dot{width:7px;height:7px;border-radius:50%;background:#b8b8ab}.mockbar span{font-size:9px;color:#76786d;margin-left:7px}
+    .mockbody{padding:19px}
+    .mock-label{font-size:9px;font-weight:950;letter-spacing:1.3px;background:var(--lime);padding:4px 7px;display:inline-block}
+    .mockbody h2{font-size:24px;line-height:1.2;letter-spacing:-1px;margin:12px 0 4px}
+    .mockbody p{font-size:10px;color:#77796d;margin:0}
+    .screen{height:155px;margin-top:15px;background:#e7e5d9;border-radius:5px;position:relative;overflow:hidden;padding:13px}
+    .screen-top{width:68%;height:7px;background:#c9c8bc;border-radius:5px}
+    .screen-title{font-size:14px;font-weight:950;line-height:1.2;margin-top:13px;position:relative;z-index:1}
+    .screen-title:after{content:"";display:block;width:85%;height:4px;background:#c2c1b5;border-radius:4px;margin-top:7px}
+    .screen-blob{position:absolute;right:17px;top:35px;width:94px;height:95px;border-radius:52% 48% 37% 63%;background:var(--orange);transform:rotate(12deg)}
+    .screen-blob:after{content:"";position:absolute;width:38px;height:53px;background:#526d43;border-radius:90% 0 90% 0;top:-18px;right:8px;transform:rotate(25deg)}
+    .screen-button{position:absolute;left:13px;bottom:13px;background:var(--lime);font-size:9px;font-weight:950;padding:7px 10px}
+    .float{position:absolute;z-index:4;background:var(--lime);padding:9px 11px;font-size:10px;font-weight:950;right:-2px;bottom:72px;transform:rotate(4deg);box-shadow:3px 4px 0 #0005}
+    .float.orange{background:var(--orange);right:4px;bottom:21px;transform:rotate(-4deg)}
+    .hero-bottom{border-top:1px solid var(--darkline);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:17px 0 23px;color:#aeb0a4;font-size:11px}
+    .hero-bottom strong{color:#fff}
+    .ticker{background:var(--lime);color:var(--ink);font-size:12px;font-weight:950;letter-spacing:.05em;padding:10px 0;overflow:hidden;white-space:nowrap}
+    .ticker span{padding:0 22px}
+    section{padding:92px 0}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:37px}
+    .kicker{font-size:10px;font-weight:950;letter-spacing:1.8px;color:#73766a}
+    h2.section-title{font-size:clamp(34px,4.5vw,55px);line-height:1.17;letter-spacing:-.065em;margin:11px 0 0;font-weight:1000}
+    .section-desc{font-size:14px;color:#5f6257;max-width:390px;margin:0}
+    .manifesto{display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:start}
+    .manifesto-big{font-size:clamp(29px,4vw,46px);font-weight:1000;line-height:1.3;letter-spacing:-.06em}
+    .marker{background:var(--lime);padding:0 .12em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+    .manifesto-text{font-size:14px;color:#54574c;max-width:520px}
+    .manifesto-text p{margin:0 0 15px}
+    .rule{height:1px;background:var(--line);margin:34px 0}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .card{background:var(--white);border:1px solid var(--line);padding:24px;min-height:220px}
+    .card-no{font-size:10px;letter-spacing:1.2px;font-weight:950;color:#77796d}
+    .card-icon{width:42px;height:42px;background:var(--lime);display:grid;place-items:center;border-radius:7px;font-size:22px;margin:22px 0 14px}
+    .card h3{font-size:18px;margin:0 0 8px;letter-spacing:-.5px}
+    .card p{font-size:13px;color:#64675c;margin:0}
+    .visual-section{background:#e8e6db}
+    .visual-layout{display:grid;grid-template-columns:.76fr 1.24fr;gap:45px;align-items:center}
+    .visual-copy p{font-size:14px;color:#56594e}
+    .steps{display:grid;gap:13px;margin-top:24px}
+    .step{display:flex;align-items:start;gap:11px;font-size:13px;color:#505349}
+    .step b{flex:none;width:25px;height:25px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--lime);font-size:11px}
+    .demo{background:var(--ink);color:#fff;border-radius:10px;padding:19px;box-shadow:0 18px 48px #17191420}
+    .demo-head{display:flex;justify-content:space-between;gap:10px;align-items:center;padding-bottom:13px;border-bottom:1px solid var(--darkline);font-size:10px;color:#b6b8ac}
+    .live{width:6px;height:6px;display:inline-block;border-radius:50%;background:var(--lime);margin-right:6px}
+    .demo-grid{display:grid;grid-template-columns:.83fr 1.17fr;gap:12px;padding-top:14px}
+    .input,.output{border:1px solid #3d4035;background:#24271f;border-radius:7px;padding:15px;min-width:0}
+    .label{font-size:9px;font-weight:950;letter-spacing:1px;color:#b7b9ad}
+    .input blockquote{font-size:14px;font-weight:800;line-height:1.6;margin:13px 0 0}
+    .input blockquote em{font-style:normal;color:var(--lime)}
+    .input-foot{font-size:9px;color:#9ea194;margin-top:19px}
+    .output{background:var(--white);color:var(--ink)}
+    .output h3{font-size:13px;margin:8px 0}
+    .mini-screen{height:137px;background:#e7e5d9;border-radius:4px;position:relative;overflow:hidden;padding:12px}
+    .mini-nav{height:7px;width:70%;background:#c6c5b9;border-radius:4px}
+    .mini-title{font-size:13px;line-height:1.2;font-weight:1000;margin-top:13px;position:relative;z-index:1}
+    .mini-title:after{content:"";display:block;width:80%;height:4px;background:#c5c4b8;margin-top:7px;border-radius:4px}
+    .mini-shape{position:absolute;width:69px;height:74px;right:11px;top:31px;border-radius:44% 56% 64% 36%;background:var(--orange);transform:rotate(15deg)}
+    .mini-shape:after{content:"";position:absolute;width:29px;height:40px;background:#587349;top:-12px;right:7px;border-radius:100% 0 100% 0}
+    .mini-cta{position:absolute;left:12px;bottom:11px;padding:5px 8px;background:var(--lime);font-size:8px;font-weight:950}
+    .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+    .tag{font-size:8px;background:#e8e6da;border-radius:99px;padding:4px 6px;color:#64665b}
+    .demo-note{font-size:10px;color:#a8aa9e;margin-top:12px}
+    .early{background:var(--ink);color:var(--paper)}
+    .early .kicker{color:var(--lime)}.early .section-desc{color:#b7b9ad}
+    .early-panel{display:grid;grid-template-columns:1fr .8fr;gap:28px;align-items:center;background:#23261e;border:1px solid #3d4035;padding:29px;border-radius:8px}
+    .early-panel h3{font-size:clamp(24px,3vw,36px);letter-spacing:-.05em;line-height:1.25;margin:10px 0}
+    .early-panel p{font-size:13px;color:#c1c3b8;margin:0}
+    .early-stamp{display:inline-block;border:1px solid var(--lime);color:var(--lime);font-size:10px;font-weight:950;letter-spacing:1.4px;padding:7px 10px;transform:rotate(-2deg)}
+    .early-list{display:grid;gap:10px}
+    .early-item{display:flex;gap:10px;align-items:start;font-size:12px;color:#d2d4c9}
+    .early-item b{color:var(--lime)}
+    .privacy{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .privacy-item{border-top:2px solid var(--ink);padding-top:15px}
+    .privacy-item h3{font-size:15px;margin:0 0 7px}
+    .privacy-item p{font-size:12px;color:#62655a;margin:0}
+    .cta{background:var(--lime);padding:70px 0}
+    .cta-inner{display:flex;align-items:center;justify-content:space-between;gap:25px}
+    .cta h2{font-size:clamp(35px,5vw,58px);line-height:1.12;letter-spacing:-.065em;margin:10px 0}
+    .cta p{font-size:13px;max-width:550px;margin:0}
+    .btn-dark{background:var(--ink);color:#fff;white-space:nowrap}
+    footer{background:var(--ink);color:#a9ab9f;padding:25px 0;font-size:10px}
+    .footer{display:flex;justify-content:space-between;align-items:start;gap:25px}
+    .footer-logo{font-size:20px;font-weight:1000;color:#fff;letter-spacing:-1px}
+    .footer-note{max-width:600px;text-align:right}
+    @media(max-width:850px){.hero{grid-template-columns:1fr;gap:12px;padding-top:54px}.visual{min-height:395px}.section-head{display:block}.section-desc{margin-top:15px}.manifesto,.visual-layout{grid-template-columns:1fr;gap:24px}.cards{grid-template-columns:1fr 1fr}.early-panel{grid-template-columns:1fr}.cta-inner{align-items:flex-start;flex-direction:column}nav{gap:14px}}
+    @media(max-width:560px){.wrap{width:calc(100% - 32px)}header{height:67px}nav a:not(.nav-cta){display:none}.logo{font-size:23px}.hero{padding:44px 0 35px}h1{font-size:clamp(46px,13vw,64px)}.hero-copy{font-size:14px}.visual{min-height:340px}.orbit{width:290px;height:290px}.scribble-card{top:7px;left:0;width:155px;padding:11px}.scribble-card b{font-size:16px}.mock{width:87%;margin-top:24px}.mockbody{padding:14px}.mockbody h2{font-size:21px}.screen{height:126px}.float{right:-1px;bottom:60px;font-size:9px}.float.orange{bottom:15px}.hero-bottom{font-size:10px}.ticker{font-size:11px}section{padding:66px 0}.section-head{margin-bottom:27px}h2.section-title{font-size:36px}.cards{grid-template-columns:1fr}.card{min-height:0}.card-icon{margin:16px 0 12px}.demo{padding:12px}.demo-grid{grid-template-columns:1fr}.input blockquote{font-size:13px}.mini-screen{height:120px}.early-panel{padding:20px}.privacy{grid-template-columns:1fr}.cta{padding:54px 0}.cta h2{font-size:39px}.footer{flex-direction:column}.footer-note{text-align:left}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="wrap">
+      <header>
+        <a class="logo" href="#" aria-label="PON トップ"><span class="logo-mark"></span>PON</a>
+        <nav aria-label="メインナビゲーション">
+          <a href="#about">PONって？</a>
+          <a href="#for-everyone">誰でも使える</a>
+          <a href="#visualize">可視化イメージ</a>
+          <a href="#safety">安心への設計</a>
+          <a class="nav-cta" href="#early">開発状況 ↗</a>
+        </nav>
+      </header>
+      <main>
+        <section class="hero" aria-labelledby="hero-title">
+          <div>
+            <div class="status"><i></i> EARLY DEVELOPMENT / 開発初期段階</div>
+            <h1 id="hero-title">その妄想、<br><span class="lime">一回、</span><br><span class="underline">出してみ。</span></h1>
+            <p class="hero-copy">「こんなのあったらいいのに」<br>その一言からでいい。<strong>企画書も、専門知識も、起業の覚悟もいらない。</strong><br>暮らしの小さな不便も、仕事の改善案も、発明も、新しい事業のタネも。頭の中にあるアイデアを見える形にして、可能性を探る場所。PONを開発しています。</p>
+            <div class="actions">
+              <a class="btn btn-lime" href="#visualize">アイデアが形になるイメージ <span aria-hidden="true">↘</span></a>
+              <a class="btn btn-line" href="#early">開発中のPONについて</a>
+            </div>
+            <p class="micro">一文だけでもいい。変な妄想でもいい。実現するかは、あとで考えよう。</p>
+          </div>
+          <div class="visual" aria-label="短いアイデアがサービスの画面イメージに変わる概念図">
+            <div class="orbit"></div>
+            <div class="scribble-card"><small>IN YOUR HEAD...</small><b>こんなの<br><span>あったらよくね？</span></b><svg width="95" height="30" viewBox="0 0 95 30" aria-hidden="true"><path d="M2 5 C28 26,57 22,82 10 M72 5 L85 9 L80 20" fill="none" stroke="#ed654b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="mock">
+              <div class="mockbar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span>PON / IDEA PREVIEW</span></div>
+              <div class="mockbody">
+                <span class="mock-label">ROUGH IDEA → VISUAL</span>
+                <h2>頭の中の「こうだったら」を、<br>見える形に。</h2>
+                <p>まとまっていない思いつきから、はじめよう。</p>
+                <div class="screen"><div class="screen-top"></div><div class="screen-title">冷蔵庫の余り物で<br>今日なに作る？</div><div class="screen-blob"></div><div class="screen-button">アイデアから生まれた画面案 ↗</div></div>
+              </div>
+            </div>
+            <div class="float">IDEA → VISUAL</div>
+            <div class="float orange">NO PERFECT PLAN NEEDED</div>
+          </div>
+        </section>
+        <div class="hero-bottom"><span><strong>01</strong> 思いつきを出す</span><span><strong>02</strong> 見える形にする</span><span><strong>03</strong> 可能性を探る</span><span>まずは、そこまででいい。</span></div>
+      </main>
+    </div>
+  </div>
+
+  <div class="ticker" aria-hidden="true"><span>未完成でいい</span> ✳ <span>一文でいい</span> ✳ <span>絵が描けなくてもいい</span> ✳ <span>起業しなくてもいい</span> ✳ <span>まず出してみ。</span> ✳ <span>未完成でいい</span> ✳ <span>一文でいい</span> ✳</div>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="kicker">01 / WHAT IS PON?</div><h2 class="section-title">完成したアイデアを<br>持ってこなくていい。</h2></div>
+        <p class="section-desc">PONは、頭の中にあるアイデアを整理し、可視化し、需要や実現方法を探るためのサービスです。まだ形になっていない段階から始められる場所を目指しています。</p>
+      </div>
+      <div class="manifesto">
+        <div class="manifesto-big">「うまく説明できない」<br>なら、まずは<br><span class="marker">そのまま出してみる。</span></div>
+        <div class="manifesto-text">
+          <p>お金も、技術も、仲間も、最初からそろっている必要はない。毎日の小さな不便、変な発明、誰かの役に立ちそうな仕組み——思いつきの段階では、何が化けるか分からない。</p>
+          <p>PONでは、アイデアを整理して概念図や画面イメージにし、他の人にも伝わる形へ近づけていく構想です。</p>
+          <p>その先で、反応を見たり、費用を考えたり、協力できる人を探したり。<strong>どこまで進めるかは、アイデアを出した人が決める。</strong></p>
+        </div>
+      </div>
+      <div class="rule"></div>
+      <div class="cards">
+        <article class="card"><div class="card-no">01 / DROP IT</div><div class="card-icon">✍</div><h3>雑なままで、出せる</h3><p>一文、箇条書き、音声メモ、手描きのスケッチ。最初から企画書に仕上げる必要はありません。</p></article>
+        <article class="card"><div class="card-no">02 / MAKE IT VISIBLE</div><div class="card-icon">✳</div><h3>見える形にしてみる</h3><p>AIによる整理や、概念図・画面モックアップなどで、頭の中のイメージを人に伝えやすくする構想です。</p></article>
+        <article class="card"><div class="card-no">03 / FIND THE NEXT STEP</div><div class="card-icon">↗</div><h3>可能性を探ってみる</h3><p>需要、価格、実現コスト、協力者。思いつきを、次に考えられる具体的な選択肢へつなげます。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="visual-section" id="visualize">
+    <div class="wrap visual-layout">
+      <div class="visual-copy">
+        <div class="kicker">02 / FROM THOUGHT TO VISUAL</div>
+        <h2 class="section-title">たとえば、<br>こんなふうに。</h2>
+        <p>「冷蔵庫の余り物を使い切れるアプリがほしい」——このくらいの説明から、どんな人のどんな困りごとを解決するのか、どんな画面が必要かを整理していくイメージです。</p>
+        <div class="steps">
+          <div class="step"><b>1</b><span><strong>思いつきを書く。</strong> まとまっていなくてOK。</span></div>
+          <div class="step"><b>2</b><span><strong>アイデアを整理する。</strong> 誰の何を解決するのかを言葉にする。</span></div>
+          <div class="step"><b>3</b><span><strong>見える形にする。</strong> 概念図や画面のたたき台を作る。</span></div>
+          <div class="step"><b>4</b><span><strong>次を考える。</strong> 反応やコストを見て、進めるか決める。</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="demo">
+          <div class="demo-head"><span><i class="live"></i>IDEA TRANSFORMATION / CONCEPT DEMO</span><span>01 → 02</span></div>
+          <div class="demo-grid">
+            <div class="input">
+              <div class="label">INPUT / ふと思いついたこと</div>
+              <blockquote>買い物リストと冷蔵庫の中身が連動して、<em>余り物を減らせるアプリ</em>があったらいい。</blockquote>
+              <div class="input-foot">テキストだけでもスタートできる</div>
+            </div>
+            <div class="output">
+              <div class="label">OUTPUT / 可視化イメージ</div>
+              <h3>「のこりもの」アプリ案</h3>
+              <div class="mini-screen"><div class="mini-nav"></div><div class="mini-title">冷蔵庫にあるもので<br>今日なに作る？</div><div class="mini-shape"></div><div class="mini-cta">レシピを見つける ↗</div></div>
+              <div class="tags"><span class="tag">画面のたたき台</span><span class="tag">機能の整理</span><span class="tag">利用イメージ</span></div>
+            </div>
+          </div>
+          <div class="demo-note">※説明用に作成したイメージです。実際の生成画面や、動作するアプリではありません。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="low-barrier">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="kicker">03 / NO ENTRY BARRIER</div><h2 class="section-title">こんな状態でも、<br>出していい。</h2></div>
+        <p class="section-desc">アイデアを出すための「正解の書き方」はありません。うまくまとまっていなくても、足りない部分は後から考えればいい。</p>
+      </div>
+      <div class="cards">
+        <article class="card"><div class="card-no">EXAMPLE A</div><div class="card-icon">💭</div><h3>「こんなの欲しい」</h3><p>毎日の小さな不便や、「誰か作ってくれないかな」という願いから。</p></article>
+        <article class="card"><div class="card-no">EXAMPLE B</div><div class="card-icon">📝</div><h3>「仕組みは分からない」</h3><p>技術や作り方が分からなくても、解決したいことや理想の姿があればいい。</p></article>
+        <article class="card"><div class="card-no">EXAMPLE C</div><div class="card-icon">🌀</div><h3>「実現できるか不明」</h3><p>現実的かどうかは、出した後に検証する。最初から自分で答えを出さなくていい。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="for-everyone">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="kicker">04 / EVERY IDEA, EVERYONE</div><h2 class="section-title">使う人も、アイデアも、<br>最初から限定しない。</h2></div>
+        <p class="section-desc">PONは起業家だけの場所ではありません。まだ名前もついていない思いつきから、仕事や事業の具体的な構想まで。入口はひとつ、進み方はそれぞれ。</p>
+      </div>
+      <div class="cards">
+        <article class="card"><div class="card-no">DAILY LIFE</div><div class="card-icon">☀</div><h3>暮らしの「こうならいいのに」</h3><p>家事、買い物、子育て、移動。毎日の小さな不便や、誰かに作ってほしいもの。</p></article>
+        <article class="card"><div class="card-no">WORK & COMMUNITY</div><div class="card-icon">⚙</div><h3>仕事や地域を、もっとよく</h3><p>職場の改善、地域の課題、学校や団体の仕組み。大きな事業でなくても、変える価値がある。</p></article>
+        <article class="card"><div class="card-no">PRODUCT & BUSINESS</div><div class="card-icon">✳</div><h3>発明、新サービス、事業のタネ</h3><p>ラフな発想も、試作品のある企画も。開発者、デザイナー、事業者などとの協業は、望む人が次の選択肢として考えられる。</p></article>
+      </div>
+      <div class="manifesto" style="margin-top:30px">
+        <div class="manifesto-big">見るだけでも、<br>考えるだけでも。<br><span class="marker">進み方は自分で決める。</span></div>
+        <div class="manifesto-text">
+          <p>アイデアを出したら、必ず起業する。誰かに売る。仲間を募集する。そんな約束はいりません。</p>
+          <p>まずは言葉にしてみる。形を見て考える。反応を知る。必要なら協力者を探す。<strong>どこまで進むかは本人が選ぶ。</strong></p>
+          <p>アイデアを持つ人だけでなく、見て意見を出す人、技術やデザインで手伝える人、実現の可能性を探る企業や事業者も、PONをつくる参加者です。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="early" id="early">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="kicker">05 / BUILDING IN PUBLIC</div><h2 class="section-title">PONは、まだ開発初期。<br>だから今、伝えておく。</h2></div>
+        <p class="section-desc">完成したサービスとして装うのではなく、何を作ろうとしているのか、今どこまで進んでいるのかを正直に伝えます。</p>
+      </div>
+      <div class="early-panel">
+        <div>
+          <span class="early-stamp">EARLY DEVELOPMENT</span>
+          <h3>いまは、構想と試作を<br>具体的なサービスにしている段階。</h3>
+          <p>PONのコンセプトとLPを整え、投稿・可視化・プライバシー・協業の仕組みを設計しています。ここに書かれた機能は構想を含み、現時点ですべてが利用できるわけではありません。</p>
+        </div>
+        <div class="early-list">
+          <div class="early-item"><b>✓</b><span>サービスの方向性と基本コンセプトを整理中</span></div>
+          <div class="early-item"><b>✓</b><span>アイデアの可視化イメージを試作</span></div>
+          <div class="early-item"><b>→</b><span>投稿、AI整理、公開範囲、本人確認などの仕様を検討</span></div>
+          <div class="early-item"><b>→</b><span>利用者が安心して使える小さなMVPを目指す</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="safety">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="kicker">06 / TRUST BY DESIGN</div><h2 class="section-title">気軽に出せることと、<br>無防備であることは違う。</h2></div>
+        <p class="section-desc">アイデアを出した人が置き去りにならないように。便利さだけでなく、公開範囲や協業相手とのやり取りも設計していきます。</p>
+      </div>
+      <div class="privacy">
+        <div class="privacy-item"><h3>見せる範囲は本人が選ぶ</h3><p>公開・限定公開・非公開を選べる仕組みを設計。アイデアの詳細を最初から全員に見せる前提にはしません。</p></div>
+        <div class="privacy-item"><h3>マッチ前は個人情報を守る</h3><p>協業の前に氏名や連絡先をむやみに公開しない。本人確認と、相手への個人情報開示も分けて考えます。</p></div>
+        <div class="privacy-item"><h3>信用をひとつの印で済ませない</h3><p>本人確認は誠実さや能力の保証ではありません。実績や行動の信用も分けて考える方針です。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap cta-inner">
+      <div>
+        <div class="kicker">YOUR IDEA CAN START SMALL</div>
+        <h2>一文だけでも、<br>始まりは始まりだ。</h2>
+        <p>現在は構想と試作の段階です。実際の投稿受付や事前登録はまだありません。まずは構想を見て、PONに必要だと思うことを考える材料にしてください。</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-dark" href="prototype/index.html">ローカル試作を触ってみる ↗</a>
+        <a class="btn btn-dark" href="https://github.com/hs9cghkmpw-alt/idea">GitHubで構想・開発状況を見る ↗</a>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="wrap footer">
+      <div><div class="footer-logo">PON</div><div>思いついたら、ポン。</div></div>
+      <div class="footer-note">PONは開発初期段階です。本ページはサービス構想と試作イメージを紹介するLPであり、投稿・AI生成・課金・マッチング機能はまだ利用できません。機能・料金・提供時期は今後の検証で変更される場合があります。</div>
+    </div>
+  </footer>
+</body>
+</html>

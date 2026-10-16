@@ -1,7 +1,7 @@
 name: PON MVP build
 
 concurrency:
-  group: pon-mvp-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  group: pon-mvp-${{ github.event.pull_request.head.ref || github.ref_name }}
   cancel-in-progress: true
 
 on:

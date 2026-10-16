@@ -4,7 +4,7 @@ This is the first real-service implementation slice, separate from the promotion
 
 ## Scope implemented
 
-- Supabase email/password authentication and session persistence.
+- Supabase email/password authentication, session persistence, and password-reset email flow.
 - Idea create, edit, draft, publish, list, search, and delete.
 - Two visibility modes: `community` (published ideas readable by authenticated members) and `private` (owner only).
 - PostgreSQL constraints and Row Level Security (RLS) policies are the authority for read/write access.

@@ -71,7 +71,25 @@
       <section id="app-view" hidden>
         <section class="welcome">
           <div><p class="eyebrow">YOUR IDEA SPACE</p><h1>アイデアを、<span>動かそう。</span></h1><p>完成していなくても大丈夫。まずは言葉にして、共有するところから。</p></div>
-          <button id="new-idea" class="button button-primary" type="button">＋ アイデアを書く</button>
+          <div class="welcome-actions"><button id="toggle-studio" class="button button-secondary" type="button">✳ Free Studioで整理</button><button id="new-idea" class="button button-primary" type="button">＋ アイデアを書く</button></div>
+        </section>
+        <section id="studio-panel" class="panel studio-panel" hidden>
+          <div class="panel-heading"><div><p class="eyebrow">FREE STUDIO · NO AI</p><h2>アイデアを、伝わる形に。</h2></div><button id="close-studio" class="button button-quiet" type="button">閉じる</button></div>
+          <p class="studio-lead">質問に答えるだけでアイデアの骨組みを整理します。入力内容はこの画面内で整形し、AIには送信しません。</p>
+          <form id="studio-form">
+            <div class="field-group"><label for="studio-seed">アイデアの種（必須）</label><textarea id="studio-seed" rows="2" maxlength="2000" required placeholder="例：近所のお店の余った食材を、必要な人につなげたい"></textarea></div>
+            <div class="field-row">
+              <div class="field-group"><label for="studio-problem">解決したい課題</label><textarea id="studio-problem" rows="3" maxlength="2000" placeholder="いま、何に困っている？"></textarea></div>
+              <div class="field-group"><label for="studio-audience">届けたい相手</label><textarea id="studio-audience" rows="3" maxlength="1000" placeholder="誰のためのアイデア？"></textarea></div>
+              <div class="field-group"><label for="studio-solution">解決の仕組み</label><textarea id="studio-solution" rows="3" maxlength="2000" placeholder="どんな方法で解決する？"></textarea></div>
+              <div class="field-group"><label for="studio-value">生まれる価値・変化</label><textarea id="studio-value" rows="3" maxlength="1500" placeholder="実現すると何がよくなる？"></textarea></div>
+              <div class="field-group"><label for="studio-needs">必要な協力・資源</label><textarea id="studio-needs" rows="3" maxlength="1500" placeholder="人、技術、場所、情報など"></textarea></div>
+              <div class="field-group"><label for="studio-next">次の一歩</label><textarea id="studio-next" rows="3" maxlength="1000" placeholder="小さく試すなら何をする？"></textarea></div>
+            </div>
+            <div class="studio-actions"><button id="studio-reset" class="button button-quiet" type="button">入力をクリア</button><button class="button button-primary" type="submit">整理して投稿フォームへ →</button></div>
+            <p id="studio-message" class="form-message" role="status" aria-live="polite"></p>
+          </form>
+          <p class="fine-print">無料版はテンプレートによる整理機能です。AIによる分析・図解生成は含みません。機密情報や個人情報は入力しないでください。</p>
         </section>
 
         <section id="editor-panel" class="panel" hidden>

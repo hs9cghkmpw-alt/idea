@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import './style.css';
 import { validateIdeaInput } from './idea-rules.js';
+import { buildStudioDraft } from './studio-rules.js';
 
 const config = {
   url: import.meta.env.VITE_SUPABASE_URL?.trim(),
@@ -340,9 +341,6 @@ $('refresh-feed').addEventListener('click', loadIdeas);
 function studioValue(id) {
   return $(id).value.trim();
 }
-function studioSection(label, value) {
-  return label + "\n" + (value || '未記入') + "\n";
-}
 function resetStudio() {
   $('studio-form').reset();
   message($('studio-message'));
@@ -364,34 +362,21 @@ $('studio-form').addEventListener('submit', (event) => {
     $('studio-seed').focus();
     return;
   }
-  const titleSeed = seed.replace(/\s+/g, ' ').trim();
-  const title = titleSeed.length > 48 ? titleSeed.slice(0, 47) + '…' : titleSeed;
-  const problem = studioValue('studio-problem');
-  const audience = studioValue('studio-audience');
-  const solution = studioValue('studio-solution');
-  const value = studioValue('studio-value');
-  const needs = studioValue('studio-needs');
-  const next = studioValue('studio-next');
-  const summaryParts = [];
-  if (problem) summaryParts.push('課題：' + problem);
-  if (audience) summaryParts.push('対象：' + audience);
-  if (solution) summaryParts.push('解決案：' + solution);
-  const summary = (summaryParts.length ? summaryParts.join('\n') : seed).slice(0, 500);
-  const body = [
-    studioSection('アイデアの種', seed),
-    studioSection('解決したい課題', problem),
-    studioSection('届けたい相手', audience),
-    studioSection('解決の仕組み', solution),
-    studioSection('生まれる価値・変化', value),
-    studioSection('必要な協力・資源', needs),
-    studioSection('次の一歩', next)
-  ].join('\n').slice(0, 20000);
+  const draft = buildStudioDraft({
+    seed,
+    problem: studioValue('studio-problem'),
+    audience: studioValue('studio-audience'),
+    solution: studioValue('studio-solution'),
+    value: studioValue('studio-value'),
+    needs: studioValue('studio-needs'),
+    next: studioValue('studio-next')
+  });
   $('idea-id').value = '';
-  $('idea-title').value = title;
+  $('idea-title').value = draft.title;
   $('idea-category').value = 'その他';
   $('idea-visibility').value = 'community';
-  $('idea-summary').value = summary;
-  $('idea-body').value = body;
+  $('idea-summary').value = draft.summary;
+  $('idea-body').value = draft.body;
   $('editor-title').textContent = 'Free Studio から投稿';
   $('publish-idea').textContent = '公開する';
   $('editor-panel').hidden = false;

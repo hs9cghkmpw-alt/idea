@@ -75,27 +75,27 @@ select is(
 );
 
 select throws_ok(
-  $insert into public.ideas (user_id, title, summary, category, visibility, status)
+  $$insert into public.ideas (user_id, title, summary, category, visibility, status)
     values ('10000000-0000-4000-8000-000000000001', 'Spoofed owner',
-            'Should be rejected', '地域', 'community', 'published')$,
+            'Should be rejected', '地域', 'community', 'published')$$,
   '42501',
   null,
   'Member B cannot create an idea owned by member A'
 );
 
 select throws_ok(
-  $insert into public.ideas (user_id, title, summary, category, visibility, status)
+  $$insert into public.ideas (user_id, title, summary, category, visibility, status)
     values ('10000000-0000-4000-8000-000000000002', 'Invalid category',
-            'Should fail DB constraint', 'made-up-category', 'community', 'published')$,
+            'Should fail DB constraint', 'made-up-category', 'community', 'published')$$,
   '23514',
   null,
   'Database rejects categories outside the allowlist'
 );
 
 select throws_ok(
-  $insert into public.ideas (user_id, title, summary, category, visibility, status)
+  $$insert into public.ideas (user_id, title, summary, category, visibility, status)
     values ('10000000-0000-4000-8000-000000000002', repeat('x', 121),
-            'Should fail DB constraint', '地域', 'community', 'published')$,
+            'Should fail DB constraint', '地域', 'community', 'published')$$,
   '23514',
   null,
   'Database rejects titles exceeding the maximum length'

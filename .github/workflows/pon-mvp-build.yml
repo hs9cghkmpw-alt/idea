@@ -35,3 +35,19 @@ jobs:
         run: npm test
       - name: Build
         run: npm run build
+
+  database-rls:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Start local Supabase services
+        working-directory: app/mvp
+        run: supabase start -x studio,inbucket,imgproxy,edge-runtime,logflare,vector
+      - name: Run database security tests
+        working-directory: app/mvp
+        run: supabase test db

@@ -111,9 +111,13 @@ function renderIdeas() {
     footer.className = 'card-footer';
     const date = new Date(idea.updated_at || idea.created_at);
     footer.append(safeText('span', '', Number.isNaN(date.getTime()) ? '' : date.toLocaleDateString('ja-JP')));
+    const actions = document.createElement('div');
+    actions.className = 'card-actions';
+    const view = safeText('button', 'small-button', '詳細を見る');
+    view.type = 'button';
+    view.addEventListener('click', () => openDetail(idea));
+    actions.append(view);
     if (idea.user_id === currentUser.id) {
-      const actions = document.createElement('div');
-      actions.className = 'card-actions';
       const edit = safeText('button', 'small-button', '編集');
       edit.type = 'button';
       edit.addEventListener('click', () => openEditor(idea));
@@ -122,8 +126,8 @@ function renderIdeas() {
       remove.type = 'button';
       remove.addEventListener('click', () => deleteIdea(idea));
       actions.append(remove);
-      footer.append(actions);
     }
+    footer.append(actions);
     card.append(meta, title, summary, footer);
     ideaFeed.append(card);
   }
@@ -142,6 +146,17 @@ async function loadIdeas() {
   ideas = data ?? [];
   message(feedMessage);
   renderIdeas();
+}
+function openDetail(idea) {
+  $('detail-title').textContent = idea.title;
+  $('detail-meta').replaceChildren(
+    safeText('span', 'tag', idea.category || 'その他'),
+    safeText('span', idea.visibility === 'private' ? 'tag private' : 'tag', idea.visibility === 'private' ? '非公開' : '公開アイデア')
+  );
+  $('detail-summary').textContent = idea.summary;
+  $('detail-body').textContent = idea.body || '詳細はまだありません。';
+  $('idea-detail').hidden = false;
+  $('idea-detail').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 function openEditor(idea = null) {
   $('editor-panel').hidden = false;
@@ -309,6 +324,7 @@ $('sign-out').addEventListener('click', async () => {
   }
 });
 $('new-idea').addEventListener('click', () => openEditor());
+$('close-detail').addEventListener('click', () => { $('idea-detail').hidden = true; });
 $('cancel-edit').addEventListener('click', closeEditor);
 $('idea-form').addEventListener('submit', (event) => { event.preventDefault(); saveIdea('published'); });
 $('save-draft').addEventListener('click', () => saveIdea('draft'));

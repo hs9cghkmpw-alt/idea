@@ -101,3 +101,15 @@ Estimate low / expected / high monthly scenarios:
 - Operations: maintenance time, moderation hours, legal/accounting review.
 
 State assumptions. Do not present a single number without usage estimates.
+
+
+## 7. Normative design documents added (2026-10-16)
+
+The following documents expand the draft decisions into reviewable rules. They remain proposals until product/policy gates are explicitly approved:
+
+- [Authorization and Privacy Matrix](AUTHORIZATION-AND-PRIVACY-MATRIX.md) — role/resource permissions, visibility semantics, explicit grants, negative authorization tests.
+- [Matching State Machine](MATCHING-STATE-MACHINE.md) — immutable terms versions, mutual consent, concurrency/replay protection, suspension and closure.
+- [Paid Content Transaction Model](PAID-CONTENT-TRANSACTION-MODEL.md) — seller/provider gate, purchase/entitlement separation, refunds, versioning and reconciliation.
+- [Security Baseline](SECURITY-BASELINE.md) — threat model, auth/session, data boundaries, infrastructure, incident response, recovery and release gates.
+
+These documents do not imply the prototype implements these controls. Any real-user release remains blocked until server enforcement, negative tests, operational ownership and explicit release approval exist.

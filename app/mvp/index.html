@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171914">
+  <meta name="description" content="PON — アイデアを共有し、育てるための場所。">
+  <title>PON — アイデアを、ポンと共有。</title>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="PON ホーム"><span class="brand-mark">P</span><span>PON</span></a>
+      <div class="topbar-right">
+        <span id="session-label" class="session-label">未ログイン</span>
+        <button id="sign-out" class="button button-quiet" type="button" hidden>ログアウト</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="setup-warning" class="notice notice-warning" hidden>
+        <strong>接続設定が必要です。</strong>
+        <p>README の手順に従い、Supabase と環境変数を設定してください。秘密鍵はブラウザに設定しないでください。</p>
+      </section>
+
+      <section id="auth-view" class="auth-layout">
+        <div class="auth-intro">
+          <p class="eyebrow">IDEAS MOVE HERE</p>
+          <h1>思いつきを、<br><span>次の誰かへ。</span></h1>
+          <p class="intro-copy">アイデアを投稿し、見つけ、育てる。まずは共有から。Studio やマッチングは、必要になったときに。</p>
+          <div class="principles"><span>01　投稿は無料</span><span>02　Studio は任意</span><span>03　公開範囲を選ぶ</span></div>
+        </div>
+        <div class="auth-card">
+          <div class="auth-tabs" role="tablist" aria-label="アカウント操作">
+            <button id="tab-login" class="tab active" type="button" role="tab" aria-selected="true">ログイン</button>
+            <button id="tab-signup" class="tab" type="button" role="tab" aria-selected="false">新規登録</button>
+          </div>
+          <form id="auth-form">
+            <div class="field-group">
+              <label for="auth-email">メールアドレス</label>
+              <input id="auth-email" name="email" type="email" autocomplete="email" required maxlength="254">
+            </div>
+            <div class="field-group">
+              <label for="auth-password">パスワード</label>
+              <input id="auth-password" name="password" type="password" autocomplete="current-password" required minlength="8" maxlength="128">
+              <small>8文字以上。実際の認証・セッション管理は Supabase が担当します。</small>
+            </div>
+            <button id="auth-submit" class="button button-primary button-wide" type="submit">ログイン</button>
+            <p id="auth-message" class="form-message" role="status" aria-live="polite"></p>
+          </form>
+          <p class="fine-print">試作版です。実在の個人情報や、公開したくない機密情報は入力しないでください。</p>
+        </div>
+      </section>
+
+      <section id="app-view" hidden>
+        <section class="welcome">
+          <div><p class="eyebrow">YOUR IDEA SPACE</p><h1>アイデアを、<span>動かそう。</span></h1><p>完成していなくても大丈夫。まずは言葉にして、共有するところから。</p></div>
+          <button id="new-idea" class="button button-primary" type="button">＋ アイデアを書く</button>
+        </section>
+
+        <section id="editor-panel" class="panel" hidden>
+          <div class="panel-heading"><div><p class="eyebrow">IDEA EDITOR</p><h2 id="editor-title">アイデアを投稿</h2></div><button id="cancel-edit" class="button button-quiet" type="button">閉じる</button></div>
+          <form id="idea-form">
+            <input id="idea-id" type="hidden">
+            <div class="field-group"><label for="idea-title">タイトル <span class="muted">（必須・120文字以内）</span></label><input id="idea-title" name="title" required maxlength="120" placeholder="例：地域の余った食材をつなぐ仕組み"></div>
+            <div class="field-row">
+              <div class="field-group"><label for="idea-category">カテゴリ</label><select id="idea-category" name="category"><option>暮らし</option><option>仕事</option><option>地域</option><option>テクノロジー</option><option>教育</option><option>環境</option><option>その他</option></select></div>
+              <div class="field-group"><label for="idea-visibility">公開範囲</label><select id="idea-visibility" name="visibility"><option value="community">ログイン会員に公開</option><option value="private">自分のみ（非公開）</option></select></div>
+            </div>
+            <div class="field-group"><label for="idea-summary">概要 <span class="muted">（必須・500文字以内）</span></label><textarea id="idea-summary" name="summary" required maxlength="500" rows="3" placeholder="どんなアイデア？ 何を変えたい？"></textarea></div>
+            <div class="field-group"><label for="idea-body">詳細 <span class="muted">（任意・20,000文字以内）</span></label><textarea id="idea-body" name="body" maxlength="20000" rows="7" placeholder="背景、使い方、必要な協力など"></textarea></div>
+            <div class="editor-footer"><span class="muted">公開範囲はサーバー側のデータベース権限でも制御します。</span><div class="button-row"><button id="save-draft" class="button button-secondary" type="button">下書き保存</button><button id="publish-idea" class="button button-primary" type="submit">公開する</button></div></div>
+            <p id="idea-message" class="form-message" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <section class="feed-section">
+          <div class="feed-heading"><div><p class="eyebrow">DISCOVER</p><h2>アイデアの広場</h2></div><span id="idea-count" class="count">0 件</span></div>
+          <div class="feed-tools"><label class="search-box"><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="タイトル・概要を検索" aria-label="アイデアを検索"></label><select id="feed-filter" aria-label="表示するアイデア"><option value="all">公開アイデア＋自分の非公開</option><option value="community">公開アイデア</option><option value="mine">自分のアイデア</option></select><button id="refresh-feed" class="button button-quiet" type="button">再読み込み</button></div>
+          <p id="feed-message" class="form-message" role="status" aria-live="polite"></p>
+          <div id="idea-feed" class="idea-grid"></div>
+        </section>
+      </section>
+    </main>
+    <footer><span class="brand-footer">PON</span><span>Web MVP · 試作版 / 本番運用前の検証用</span></footer>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

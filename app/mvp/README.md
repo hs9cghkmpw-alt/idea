@@ -6,13 +6,14 @@ This is the first real-service implementation slice, separate from the promotion
 
 - Supabase email/password authentication, session persistence, and password-reset email flow.
 - Idea create, edit, draft, publish, list, search, and delete.
+- Free Studio template-based structuring for the idea seed, problem, audience, solution, value, required support/resources, and next step; converts the result into a post draft without AI/API calls.
 - Two visibility modes: `community` (published ideas readable by authenticated members) and `private` (owner only).
 - PostgreSQL constraints and Row Level Security (RLS) policies are the authority for read/write access.
 - Client-rendered user content uses `textContent`, not HTML injection.
 
 ## Explicitly not implemented
 
-No production readiness is implied. There is no paid content, payment, Studio AI, file upload, matching, direct messaging, identity verification, moderation console, account deletion workflow, or audit/incident system. The existing promo site is not modified. Do not use real sensitive ideas or credentials for testing.
+No production readiness is implied. There is no AI-powered Studio, paid content, payment, file upload, matching, direct messaging, identity verification, moderation console, account deletion workflow, or audit/incident system. Free Studio only formats text locally using fixed templates and does not call an AI service. The existing promo site is not modified. Do not use real sensitive ideas or credentials for testing.
 
 ## Requirements
 

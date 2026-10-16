@@ -43,6 +43,10 @@
     @media(prefers-reduced-motion:reduce){.aud-card,.btn{transition:none}.aud-card:hover,.btn:hover{transform:none}}
     a{color:inherit}a,button{-webkit-tap-highlight-color:transparent}
     a:focus-visible,button:focus-visible{outline:3px solid #2857c5;outline-offset:4px}
+    .category-cloud{display:flex;flex-wrap:wrap;gap:9px;margin-top:25px}
+    .category-cloud span{display:inline-flex;align-items:center;background:var(--white);border:1px solid var(--line);border-radius:3px;padding:9px 13px;font-size:13px;font-weight:800}
+    .category-cloud span:first-child{background:var(--lime);border-color:var(--lime)}
+    .category-foot{margin-top:18px;padding:17px 19px;background:#eceae0;border-left:4px solid var(--orange);font-size:13px;color:#51554a}
     .wrap{width:min(var(--max),calc(100% - 40px));margin-inline:auto}
     .top{background:var(--ink);color:var(--paper)}
     header{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid var(--darkline)}
@@ -189,6 +193,18 @@
           <a class="btn btn-dark" href="#sample">アイデアの掲載イメージ ↗</a>
         </article>
       </div>
+    </div>
+  </section>
+
+  <section id="categories">
+    <div class="wrap">
+      <div class="eyebrow">EXPLORE BY CATEGORY</div>
+      <h2>ジャンルから、<br>自分に近いアイデアを探す。</h2>
+      <p class="lead">福祉、教育、地域、テクノロジー、ものづくり。アイデアに複数のタグを付け、ジャンルやキーワードから探せる仕組みを目指します。分野をまたぐアイデアも、ひとつの分類に閉じ込めません。</p>
+      <div class="category-cloud" aria-label="ジャンルタグの例">
+        <span>福祉・介護</span><span>医療・健康</span><span>子育て</span><span>教育・学び</span><span>地域・まちづくり</span><span>環境・エネルギー</span><span>テクノロジー・AI</span><span>ものづくり</span><span>仕事・働き方</span><span>飲食・食品</span><span>暮らし・生活</span><span>文化・エンタメ</span><span>スポーツ</span><span>防災・安全</span><span>ビジネス・新規事業</span><span>その他・新ジャンル</span>
+      </div>
+      <div class="category-foot"><strong>タグは複数選択。</strong> 「福祉 × AI × 地域」のように、ジャンルを横断してアイデアを発見できる検索体験を構想しています。タグ一覧や検索条件は、実際の投稿傾向を見ながら育てます。</div>
     </div>
   </section>
 

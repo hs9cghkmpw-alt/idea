@@ -1,180 +1,40 @@
 <!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#f6f5f0">
-<meta name="description" content="PONの体験デモ。アイデアを読み、ビジュアルを見て、実現する仲間とつながる。">
-<title>PON｜アイデアが流れ、人とつながる</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f5f8f4">
+<meta name="description" content="PONの体験デモ。アイデアの文章が、仕組み・数字・実行計画へと見える化される体験。">
+<title>PON｜GreenCycle アイデアの可視化デモ</title>
 <style>
-:root{--ink:#20251f;--muted:#73786f;--line:#e4e5dc;--paper:#fff;--canvas:#f6f5f0;--green:#c9f36a;--green-dark:#31521e;--orange:#ff855c;--blue:#dbe9ff;--shadow:0 14px 40px #1d25100c}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--canvas);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;line-height:1.65}button,a{font:inherit}a{color:inherit;text-decoration:none}button{cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid #5d8e2e;outline-offset:3px}.wrap{width:min(1120px,calc(100% - 36px));margin:auto}.topbar{position:sticky;top:0;z-index:10;background:#f6f5f0eF;backdrop-filter:blur(16px);border-bottom:1px solid #e6e6dd}.nav{height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px}.logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:900;letter-spacing:-1px}.logo-mark{display:grid;place-items:center;width:35px;height:35px;border-radius:12px;background:var(--green);font-weight:950}.nav-links{display:flex;align-items:center;gap:23px;font-size:13px;color:#555b51}.pill-button,.button{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:11px 17px;font-weight:750;font-size:13px}.pill-button,.button.dark{background:var(--ink);color:white}.button.light{background:var(--green);color:var(--ink)}.hero{padding:66px 0 46px;display:grid;grid-template-columns:1fr .88fr;align-items:center;gap:52px}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid #dce0d2;border-radius:99px;font-size:11px;font-weight:800;letter-spacing:.08em;color:#526146}.dot{width:7px;height:7px;border-radius:50%;background:#7aaf3c}.hero h1{font-size:clamp(38px,5.3vw,66px);line-height:1.12;letter-spacing:-.055em;margin:18px 0}.hero h1 em{font-style:normal;position:relative;z-index:0;white-space:nowrap}.hero h1 em:after{content:"";position:absolute;left:0;right:0;bottom:3px;height:15px;background:var(--green);z-index:-1;transform:rotate(-1.3deg)}.hero p{font-size:16px;color:#62685e;max-width:490px}.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.text-link{font-size:13px;font-weight:750;text-decoration:underline;text-underline-offset:4px}.hero-note{font-size:11px!important;margin-top:17px}.hero-art{position:relative;min-height:350px;background:#e9eddf;border-radius:28px;padding:22px;overflow:hidden}.orb{position:absolute;width:210px;height:210px;border-radius:50%;background:#d2f17b;right:-34px;top:-53px}.orb.two{width:125px;height:125px;right:auto;left:-28px;top:auto;bottom:-38px;background:#ffb49b}.art-card{position:relative;background:white;border:1px solid #e8e9e2;border-radius:17px;padding:19px;box-shadow:var(--shadow);max-width:350px;margin:16px auto;transform:rotate(-2deg)}.art-card .tiny{font-size:10px;letter-spacing:.1em;font-weight:850;color:#7c8377}.art-card h3{font-size:21px;line-height:1.35;margin:10px 0}.art-visual{height:108px;border-radius:12px;background:linear-gradient(120deg,#dcecff,#b6d4ff);position:relative;overflow:hidden}.art-visual:before{content:"";position:absolute;width:140px;height:90px;background:#fff9;border-radius:50%;left:34px;top:35px;transform:rotate(-20deg)}.art-visual:after{content:"";position:absolute;width:95px;height:95px;border:20px solid #ff936e;border-radius:50%;right:28px;top:9px}.art-tag{display:inline-block;border-radius:99px;background:#f1f4e9;padding:5px 9px;font-size:10px;font-weight:800;margin-top:12px}.floating{position:absolute;right:15px;bottom:28px;background:#fff;border:1px solid #e6e8de;border-radius:14px;padding:12px 15px;box-shadow:var(--shadow);font-size:12px;font-weight:800;transform:rotate(3deg)}.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:38px 0 19px}.section-head h2{font-size:clamp(24px,3vw,34px);line-height:1.2;letter-spacing:-.04em;margin:0}.section-head p{font-size:12px;color:var(--muted);margin:0}.demo-section{padding:34px 0 70px;scroll-margin-top:84px}.category-tools{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;margin:0 0 18px}
-.search-row{display:flex;gap:10px;align-items:center;margin-bottom:12px}
-.idea-search{width:100%;min-width:0;border:1px solid #dfe3d7;border-radius:11px;padding:12px 14px;background:#fbfcf8;color:var(--ink);font:inherit;font-size:13px}
-.filter-label{font-size:11px;font-weight:850;color:#62685e;margin-bottom:9px}
-.filter-tags{display:flex;flex-wrap:wrap;gap:7px}
-.filter-tag{border:1px solid #e0e4d9;border-radius:999px;padding:7px 11px;background:#fff;color:#4e5648;font-size:11px;font-weight:800}
-.filter-tag[aria-pressed="true"]{background:var(--green);border-color:var(--green-dark);color:#26351d}
-.results-count{font-size:11px;color:var(--muted);margin-top:12px}
-.post[hidden]{display:none}
-.empty-results{display:none;padding:24px;text-align:center;border:1px dashed #d7dccd;border-radius:16px;color:var(--muted);font-size:13px}
-.empty-results.show{display:block}
-.demo-layout{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:22px;align-items:start}.feed{display:grid;gap:15px}.post,.side-card{background:var(--paper);border:1px solid var(--line);border-radius:19px;box-shadow:0 4px 16px #1d251008}.post{padding:22px}.post-head{display:flex;align-items:center;gap:11px}.avatar{width:40px;height:40px;display:grid;place-items:center;border-radius:50%;font-weight:900;background:#f4d5c8}.avatar.blue{background:#dce8ff}.avatar.lime{background:#dff0bd}.author{font-weight:850;font-size:13px}.meta{font-size:11px;color:var(--muted)}.post-tag{margin-left:auto;align-self:start;font-size:10px;font-weight:800;color:#58624e;background:#f1f3eb;padding:5px 9px;border-radius:99px}.post h3{font-size:22px;line-height:1.35;letter-spacing:-.03em;margin:17px 0 8px}.post-copy{font-size:14px;color:#4f554b;white-space:pre-line}.post-actions{display:flex;flex-wrap:wrap;align-items:center;gap:9px;border-top:1px solid #eff0ea;margin-top:17px;padding-top:14px}.small-action{border:1px solid #e2e5dc;background:#fff;border-radius:99px;padding:8px 12px;font-size:11px;font-weight:800;color:#41483d}.small-action:hover{background:#f4f6ef}.small-action.primary{background:var(--green);border-color:var(--green)}.state-label{font-size:10px;color:#72786d;margin-left:auto}.locked-area{margin-top:17px;border:1px solid #eadfcf;border-radius:14px;overflow:hidden}.locked-head{display:flex;align-items:center;gap:8px;padding:10px 13px;background:#fff8ed;color:#835d2d;font-size:11px;font-weight:850}.locked-content{padding:15px;background:linear-gradient(#f8f7f2,#f2f1eb);position:relative}.locked-content p{margin:0;color:#85897f;font-size:12px;filter:blur(3px);user-select:none}.locked-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px}.locked-cta span{font-size:11px;color:#666b61}.visual-panel{display:none;margin-top:16px;padding:14px;background:#f4f6ef;border-radius:14px;animation:rise .25s ease}.visual-panel.open{display:block}.visual-panel .browserbar{display:flex;align-items:center;gap:5px;background:#fff;border:1px solid #e6e8df;border-bottom:0;border-radius:10px 10px 0 0;padding:9px}.browserbar i{width:6px;height:6px;border-radius:50%;background:#c6c9bf}.browserbar span{margin-left:8px;font-size:9px;color:#858a80}.mini-site{background:#fff;border:1px solid #e6e8df;border-radius:0 0 10px 10px;padding:18px}.mini-site small{font-size:9px;font-weight:900;letter-spacing:.1em;color:#6a7c50}.mini-site h4{font-size:20px;line-height:1.25;margin:9px 0}.mini-site p{font-size:11px;color:#697064;margin:0}.mini-hero-visual{height:100px;border-radius:8px;margin-top:13px;background:linear-gradient(130deg,#d7e8ff,#c5f0dc);position:relative;overflow:hidden}.mini-hero-visual:before{content:"";position:absolute;width:90px;height:90px;border-radius:50%;background:#fff9;left:18%;top:26px}.mini-hero-visual:after{content:"";position:absolute;width:58px;height:58px;border:12px solid #ff8c67;border-radius:50%;right:20%;top:17px}.mini-features{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.mini-features span{height:28px;border-radius:5px;background:#f1f3ed}.side-card{padding:18px;position:sticky;top:88px}.side-card h3{font-size:15px;margin:0 0 12px}.side-step{display:flex;gap:10px;margin:13px 0}.step-num{flex:none;width:25px;height:25px;display:grid;place-items:center;border-radius:8px;background:#eef2e5;font-size:11px;font-weight:900}.side-step b{display:block;font-size:12px}.side-step p{font-size:11px;color:var(--muted);margin:3px 0 0}.side-note{font-size:10px;color:#777d71;border-top:1px solid var(--line);padding-top:13px;margin-top:15px}.principles{padding:58px 0;background:#20251f;color:#fff;scroll-margin-top:70px}.principles .section-head p{color:#b9c0b1}.principle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.principle{border:1px solid #41483c;border-radius:17px;padding:20px}.principle .icon{display:grid;place-items:center;width:37px;height:37px;background:#333c2b;border-radius:12px;color:var(--green);font-size:18px}.principle h3{font-size:15px;margin:14px 0 6px}.principle p{font-size:12px;color:#c0c6b9;margin:0}.bottom-cta{padding:66px 0;text-align:center}.bottom-cta h2{font-size:clamp(28px,4vw,45px);line-height:1.18;letter-spacing:-.04em;margin:0 0 13px}.bottom-cta p{color:var(--muted);font-size:14px;max-width:550px;margin:0 auto 23px}.footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:11px}.footer-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);background:#20251f;color:#fff;padding:12px 17px;border-radius:99px;font-size:12px;opacity:0;pointer-events:none;transition:.2s;z-index:20}.toast.show{opacity:1;transform:translate(-50%,0)}@keyframes rise{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}@media(max-width:800px){.hero{grid-template-columns:1fr;gap:28px;padding-top:44px}.hero-art{min-height:300px}.demo-layout{grid-template-columns:1fr}.side-card{position:static;order:-1}.side-card .side-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.side-step{margin:0}.side-note{margin-top:12px}.nav-links{gap:12px}.nav-links a:not(.pill-button){display:none}}@media(max-width:540px){.wrap{width:min(100% - 24px,1120px)}.nav{height:62px}.hero h1{font-size:39px}.hero-art{min-height:285px;padding:12px}.art-card{padding:15px;margin-top:22px}.floating{right:10px;bottom:16px}.section-head{display:block}.section-head p{margin-top:9px}.post{padding:16px}.post h3{font-size:20px}.principle-grid{grid-template-columns:1fr}.side-card .side-steps{grid-template-columns:1fr}.hero-actions .button{flex:1}.post-actions{gap:7px}.state-label{width:100%;margin-left:0}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+:root{--ink:#18352b;--muted:#6c8178;--line:#e1ebe4;--paper:#fff;--canvas:#f3f7f4;--green:#20aa69;--deep:#087b4a;--lime:#dff7b5;--orange:#f6a342;--blue:#e5f4ff;--purple:#eee8ff;--shadow:0 12px 36px #1c49300c}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--canvas);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;line-height:1.6}button,a{font:inherit}a{color:inherit;text-decoration:none}button{cursor:pointer}.top{height:68px;background:#ffffffed;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 max(24px,calc((100% - 1360px)/2));gap:20px;position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)}.brand{font-size:24px;font-weight:900;letter-spacing:-1px;display:flex;align-items:center;gap:10px}.mark{display:grid;place-items:center;background:var(--green);color:white;width:34px;height:34px;border-radius:11px;font-size:23px}.nav{display:flex;gap:26px;font-size:13px;font-weight:700;color:#50685e}.search{background:#f3f6f4;border-radius:22px;padding:9px 15px;color:#809087;font-size:12px;min-width:230px}.page{max-width:1360px;margin:18px auto;padding:0 18px;display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:14px}.main,.sidecard{background:white;border:1px solid #eaf0eb;border-radius:15px;box-shadow:var(--shadow)}.main{padding:20px}.intro{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.tag{display:inline-flex;padding:4px 11px;border-radius:30px;background:#e0f7e9;color:#14814e;font-size:11px;font-weight:800}.eyebrow{font-size:10px;letter-spacing:1.4px;color:#7d9387;font-weight:800}.h1{font-size:clamp(24px,3vw,34px);line-height:1.2;letter-spacing:-1.1px;margin:8px 0 4px;font-weight:900}.subtitle{font-size:13px;color:#4e6a5c;margin:0}.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}.tags span{background:#eef7f1;color:#43745b;border-radius:30px;padding:4px 10px;font-size:11px;font-weight:700}.actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.btn{border:1px solid var(--line);border-radius:24px;background:#fff;padding:10px 15px;font-size:12px;font-weight:800;color:var(--ink)}.btn.primary{background:var(--green);border-color:var(--green);color:white}.author{display:flex;align-items:center;gap:10px;margin:16px 0 17px;font-size:12px}.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#e5f5e9;font-size:19px}.muted{color:var(--muted)}.social{display:flex;gap:8px;margin-left:auto}.pill{border:1px solid var(--line);border-radius:20px;padding:5px 10px;color:#4e6d5c;font-size:11px;background:#fff}.hero{position:relative;overflow:hidden;border-radius:13px;background:linear-gradient(135deg,#d8f5f7,#eefbf2 62%,#d6f0e0);padding:22px;min-height:370px;display:grid;grid-template-columns:210px 1fr;gap:14px}.hero:before{content:"";position:absolute;inset:auto -4% -60px -4%;height:150px;background:linear-gradient(0deg,#9dd5a8aa,transparent);border-radius:50%}.hero-copy{position:relative;z-index:1;align-self:center}.hero-copy h2{font-size:29px;line-height:1.25;letter-spacing:-1px;margin:0 0 12px;color:#08734a}.hero-copy p{font-size:12px;color:#316b55;line-height:1.9}.hero-copy .mini-brand{font-size:17px;font-weight:900;margin-top:22px;color:#176c4c}.cycle{position:relative;z-index:1;display:grid;place-items:center;min-height:320px}.cycle svg{width:100%;max-width:650px;overflow:visible}.cycle text{font-family:inherit;font-weight:800}.visual-note{position:absolute;right:3px;top:0;background:#ffffffb8;border:1px solid #ffffff;border-radius:20px;padding:6px 11px;font-size:10px;color:#367257;font-weight:800}.grid2{display:grid;grid-template-columns:1.2fr 1fr;gap:12px;margin-top:13px}.panel{border:1px solid var(--line);border-radius:13px;padding:17px;background:#fff}.panel h3{margin:0 0 12px;font-size:14px;display:flex;align-items:center;gap:8px}.panel h3 .ico{display:grid;place-items:center;width:24px;height:24px;border-radius:7px;background:#e9f8ed;font-size:13px}.desc{font-size:12px;color:#526c5e;line-height:1.95;margin:0 0 14px}.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.benefit{padding:10px;border-radius:10px;background:#f0faf3;min-height:98px}.benefit:nth-child(2){background:#edf6ff}.benefit:nth-child(3){background:#fff5e8}.benefit:nth-child(4){background:#f4efff}.benefit .emoji{font-size:19px}.benefit b{display:block;font-size:11px;margin:4px 0}.benefit small{display:block;color:#6b8175;font-size:9px;line-height:1.6}.steps{display:grid;gap:0}.step{display:grid;grid-template-columns:32px 1fr;gap:10px;position:relative;padding:0 0 14px}.step:not(:last-child):before{content:"";position:absolute;left:15px;top:31px;bottom:0;border-left:2px dashed #d8e8dd}.num{width:31px;height:31px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:900;background:#86c94d}.step:nth-child(2) .num{background:var(--orange)}.step:nth-child(3) .num{background:#2ba7a0}.step:nth-child(4) .num{background:#9670e8}.step b{font-size:11px;display:block;margin:1px 0}.step p{font-size:10px;color:#6d8277;margin:0}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.metric{padding:12px 9px;text-align:center;border-radius:10px;background:#f8fbf8;border:1px solid #edf3ee}.metric .micon{font-size:20px}.metric b{display:block;font-size:20px;color:#16834f;line-height:1.35}.metric span{font-size:10px;color:#5f786b}.metric small{font-size:9px;color:#829389;display:block}.stakeholders{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stake{text-align:center;padding:10px 4px;border-radius:10px;background:#f6faf7}.stake .bubble{width:42px;height:42px;border-radius:50%;margin:0 auto 5px;background:#e5f6e9;display:grid;place-items:center;font-size:22px}.stake b{display:block;font-size:10px}.stake small{font-size:9px;color:#819187}.side{display:grid;gap:13px;align-content:start}.sidecard{padding:17px}.sidecard h3{font-size:14px;margin:0 0 12px}.product-visual{height:230px;border-radius:11px;background:linear-gradient(145deg,#e8f6e9,#f8f5e9);display:grid;place-items:center;position:relative;overflow:hidden}.product-visual .machine{width:130px;height:104px;background:linear-gradient(135deg,#fff,#dce8db);border:2px solid #c4d6c4;border-radius:20px 20px 25px 25px;box-shadow:0 18px 20px #466b4520;position:relative;display:grid;place-items:center;font-size:35px}.machine:before{content:"";position:absolute;top:-12px;left:17px;right:17px;height:20px;background:#fdfefa;border:2px solid #c4d6c4;border-radius:10px}.machine:after{content:"GreenCycle";position:absolute;bottom:12px;font-size:9px;color:#3b7954;font-weight:900}.phone{position:absolute;right:23px;bottom:27px;width:68px;height:125px;background:#20382e;border-radius:13px;padding:5px;transform:rotate(5deg);box-shadow:0 8px 18px #1e47352b}.phonein{height:100%;border-radius:9px;background:white;text-align:center;padding:9px 3px;font-size:8px;color:#287a4d}.gauge{width:40px;height:40px;border:5px solid #d9f2d9;border-top-color:#20aa69;border-right-color:#20aa69;border-radius:50%;margin:10px auto 4px;display:grid;place-items:center;font-weight:900}.garden{position:absolute;left:15px;bottom:17px;font-size:37px}.sidecaption{font-size:11px;color:#698074;margin:10px 0 0}.people{display:flex;align-items:center;gap:7px}.faces{display:flex}.faces span{width:29px;height:29px;border:2px solid white;border-radius:50%;display:grid;place-items:center;background:#e5f5e9;margin-left:-5px;font-size:15px}.people small{color:#668071;font-size:10px}.people .btn{margin-left:auto;padding:8px 13px}.comment{display:grid;grid-template-columns:30px 1fr;gap:9px;padding:12px 0;border-bottom:1px solid #edf2ee}.comment:last-of-type{border:0}.comment .avatar{width:29px;height:29px;font-size:15px}.comment b{font-size:11px}.comment time{font-size:9px;color:#8b9b91;margin-left:7px}.comment p{font-size:11px;color:#526d5e;margin:4px 0}.heart{font-size:10px;color:#e56f63}.commentform{display:flex;gap:6px;margin-top:10px}.commentform input{min-width:0;flex:1;border:1px solid var(--line);border-radius:9px;padding:9px;font-size:11px}.commentform button{border:0;background:var(--green);color:white;border-radius:9px;padding:0 12px;font-weight:800}.demo-banner{margin-top:14px;border:1px dashed #c7ddce;background:#f7fcf8;border-radius:12px;padding:13px 16px;font-size:11px;color:#547160;display:flex;gap:10px;align-items:flex-start}.demo-banner b{color:#286447}.footer{text-align:center;padding:20px;color:#809188;font-size:10px}.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#173e2d;color:white;border-radius:30px;padding:11px 18px;font-size:12px;transition:.25s;z-index:20}.toast.show{opacity:1;transform:translate(-50%,0)}@media(max-width:1000px){.page{grid-template-columns:1fr}.side{grid-template-columns:repeat(2,minmax(0,1fr))}.sidecard:last-child{grid-column:1/-1}.hero{grid-template-columns:190px 1fr}}@media(max-width:650px){.top{padding:0 14px;height:60px}.nav{display:none}.search{min-width:0;width:42%;font-size:10px}.page{padding:0 9px;margin:10px auto}.main{padding:12px}.intro{display:block}.actions{justify-content:flex-start;margin-top:12px}.author{flex-wrap:wrap}.social{margin-left:0}.hero{grid-template-columns:1fr;padding:17px;gap:0}.hero-copy h2{font-size:25px}.hero-copy p{max-width:340px}.hero-copy .mini-brand{margin-top:8px}.cycle{min-height:270px}.visual-note{top:5px}.grid2{grid-template-columns:1fr}.benefits{grid-template-columns:repeat(2,1fr)}.metrics{grid-template-columns:repeat(2,1fr)}.side{grid-template-columns:1fr}.sidecard:last-child{grid-column:auto}.product-visual{height:220px}.stakeholders{gap:3px}}
 </style>
 </head>
 <body>
-<header class="topbar"><div class="wrap nav">
-<a class="logo" href="#top"><span class="logo-mark">P</span>PON</a>
-<nav class="nav-links" aria-label="メインナビゲーション"><a href="#experience">体験する</a><a href="#concept">PONの考え方</a><a class="pill-button" href="#experience">デモを触ってみる ↘</a></nav>
-</div></header>
-<main id="top">
-<section class="wrap hero">
-<div>
-<span class="eyebrow"><span class="dot"></span> IDEAS × PEOPLE × POSSIBILITY</span>
-<h1>アイデアは、<br>文章だけで<br><em>終わらせない。</em></h1>
-<p>思いつきを投稿する。誰かが読み、ビジュアルを見て、仲間になる。PONは、アイデアが人や資金、実現する力と出会う場所を目指しています。</p>
-<div class="hero-actions"><a class="button dark" href="#experience">PONの使い心地を体験 ↘</a><a class="button light" href="#concept">仕組みを知る</a></div>
-<p class="hero-note">まずはサンプル投稿を操作してみてください。登録不要のコンセプトデモです。</p>
-</div>
-<div class="hero-art" aria-label="アイデアがビジュアルに変わるイメージ">
-<div class="orb"></div><div class="orb two"></div>
-<div class="art-card"><div class="tiny">IDEA PREVIEW / 01</div><h3>空いている時間を、<br>新しい価値に。</h3><div class="art-visual"></div><span class="art-tag">アイデア → ビジュアル</span></div>
-<div class="floating">✳ アイデアから、つながりへ</div>
-</div>
-</section>
-<section class="demo-section" id="experience">
-<div class="wrap">
-<div class="section-head"><div><span class="eyebrow">TRY THE EXPERIENCE</span><h2 style="margin-top:13px">読む。ひらく。つながる。</h2></div><p>下の投稿をクリックして、PONの体験を試せます。</p></div>
-<div class="category-tools" aria-label="アイデア検索とジャンル絞り込み">
-  <div class="search-row"><input class="idea-search" id="idea-search" type="search" placeholder="キーワードで検索（例：福祉、子育て、AI）" aria-label="アイデアをキーワード検索"></div>
-  <div class="filter-label">ジャンルで絞り込む · 複数選択できます</div>
-  <div class="filter-tags" id="filter-tags">
-    <button class="filter-tag" type="button" data-category="all" aria-pressed="true">すべて</button>
-    <button class="filter-tag" type="button" data-category="福祉・介護" aria-pressed="false">福祉・介護</button>
-    <button class="filter-tag" type="button" data-category="子育て・教育" aria-pressed="false">子育て・教育</button>
-    <button class="filter-tag" type="button" data-category="地域・まちづくり" aria-pressed="false">地域・まちづくり</button>
-    <button class="filter-tag" type="button" data-category="テクノロジー・AI" aria-pressed="false">テクノロジー・AI</button>
-    <button class="filter-tag" type="button" data-category="ビジネス・新規事業" aria-pressed="false">ビジネス・新規事業</button>
-    <button class="filter-tag" type="button" data-category="暮らし・生活" aria-pressed="false">暮らし・生活</button>
-  </div>
-  <div class="results-count" id="results-count" aria-live="polite">サンプル投稿 3件</div>
-</div>
-<div class="demo-layout">
-<div class="feed" id="idea-feed" aria-label="PONのサンプルタイムライン">
-<article class="post" data-categories="暮らし・生活,地域・まちづくり,テクノロジー・AI">
-<div class="post-head"><div class="avatar">KM</div><div><div class="author">K. Mori</div><div class="meta">プロダクトのアイデア · 2時間前</div></div><span class="post-tag">協力者を募集中</span></div>
-<h3>空いている駐車場を、時間単位で貸し借りできるサービス</h3>
-<div class="post-copy">自宅や店舗の駐車場を、使っていない時間だけ貸し出せる仕組み。借りたい人は近くの空きスペースを探せる。
-
-まずは地域を絞って、需要と運用の課題を確かめたい。</div>
-<div class="post-actions"><button class="small-action primary" type="button" data-visual="parking" aria-expanded="false">▧ ビジュアルを見る</button><button class="small-action" type="button" data-toast="コメント欄はサービス構想中です。">◯ コメント</button><button class="small-action" type="button" data-toast="協力・参加の受付機能は、サービス構想中です。">↗ 協力・参加</button><span class="state-label">概要は無料公開</span></div>
-<div class="visual-panel" id="visual-parking">
-<div class="browserbar"><i></i><i></i><i></i><span>サンプルLP / 駐車場シェア</span></div>
-<div class="mini-site"><small>SPACE SHARE / CONCEPT</small><h4>空きスペースを、<br>街の新しい選択肢に。</h4><p>近くの駐車場を見つけて、必要な時間だけ利用する。</p><div class="mini-hero-visual"></div><div class="mini-features"><span></span><span></span><span></span></div></div>
-<p style="font-size:10px;color:#73786f;margin:8px 0 0">※ 投稿の文章をもとにした、体験用のビジュアル例です。</p>
-</div>
-<div class="locked-area">
-<div class="locked-head">🔒 投稿の続き · 詳細プラン</div>
-<div class="locked-content"><p>収益モデル：予約ごとの手数料を想定。初期は対象地域を限定し、駐車場オーナーへの登録案内と利用者の需要検証を並行して進める。運営コストやトラブル対応を検証してから拡大する。</p>
-<div class="locked-cta"><span>詳細は投稿者が公開範囲を設定</span><button class="small-action" type="button" data-toast="これはデモです。有料購入・限定公開の実際の機能はまだありません。">続きを見る ↗</button></div></div>
-</div>
-</article>
-<article class="post" data-categories="子育て・教育,暮らし・生活,テクノロジー・AI">
-<div class="post-head"><div class="avatar blue">AY</div><div><div class="author">A. Yamada</div><div class="meta">暮らしのアイデア · 35分前</div></div><span class="post-tag">アイデア募集中</span></div>
-<h3>子どもが、自分で予定を管理できる仕組み</h3>
-<div class="post-copy">家族の予定やお手伝いを共有して、子ども自身が達成状況を確認できるアプリを作りたい。親が管理するだけでなく、子どもが自分で使いたくなる体験にしたい。</div>
-<div class="post-actions"><button class="small-action" type="button" data-toast="この投稿には、まだビジュアルがありません。">▧ ビジュアルはまだありません</button><button class="small-action" type="button" data-toast="コメント欄はサービス構想中です。">◯ コメント</button><button class="small-action" type="button" data-toast="協力・参加の受付機能は、サービス構想中です。">↗ 協力・参加</button><span class="state-label">文章だけの投稿</span></div>
-</article>
-<article class="post" data-categories="地域・まちづくり,ビジネス・新規事業,福祉・介護">
-<div class="post-head"><div class="avatar lime">RN</div><div><div class="author">R. Nishi</div><div class="meta">事業アイデア · 昨日</div></div><span class="post-tag">限定公開の例</span></div>
-<h3>地域の小さなお店を、共同で応援する仕組み</h3>
-<div class="post-copy">お気に入りのお店を、利用者が継続的に応援できる仕組みを考えています。まずはお店側と利用者側、両方の課題を知りたい。</div>
-<div class="locked-area"><div class="locked-head">🔒 詳細はマッチング後に開示する想定</div><div class="locked-content"><p>協力店舗の候補、具体的な収益分配、運営フロー、検証中の資料などの詳細情報。</p><div class="locked-cta"><span>公開範囲は投稿者が選ぶ</span><button class="small-action" type="button" data-toast="マッチング後の開示は構想段階です。">開示条件を見る ↗</button></div></div></div>
-</article>
-<div class="empty-results" id="empty-results">条件に合うアイデアはありません。別のジャンルやキーワードを試してください。</div>
-</div>
-<aside class="side-card">
-<h3>このデモで試せること</h3>
-<div class="side-steps">
-<div class="side-step"><span class="step-num">01</span><div><b>文章を読む</b><p>短くても長くても、アイデアが投稿の中心。</p></div></div>
-<div class="side-step"><span class="step-num">02</span><div><b>ビジュアルを開く</b><p>作成済みなら見られる。なければ未作成と表示。</p></div></div>
-<div class="side-step"><span class="step-num">03</span><div><b>限定エリアを知る</b><p>概要を無料公開し、詳細は有料・承認後などに分ける構想。</p></div></div>
-</div>
-<div class="side-note">検索とジャンル絞り込みは、このサンプル投稿に対して動作します。実サービスの投稿データや検索機能ではありません。実際の投稿・決済・マッチングも行いません。</div>
-</aside>
-</div>
-</div>
-</section>
-<section class="principles" id="concept">
-<div class="wrap">
-<div class="section-head"><div><span class="eyebrow" style="border-color:#4a5542;color:#d7e9b9">THE PON IDEA</span><h2 style="margin-top:13px">入り口は広く。<br>公開の深さは、自分で選ぶ。</h2></div><p>投稿する人も、読む人も、参加する人も。</p></div>
-<div class="principle-grid">
-<article class="principle"><div class="icon">✎</div><h3>文章だけでも始められる</h3><p>アイデアがまとまっていなくても、まず文章で投稿。可視化は必要に応じて追加する。</p></article>
-<article class="principle"><div class="icon">▧</div><h3>伝え方を増やせる</h3><p>LPや画面案などのビジュアルで、文章だけでは伝わりにくい構想を具体的に見せる。</p></article>
-<article class="principle"><div class="icon">◈</div><h3>見せる範囲を選べる</h3><p>無料公開・有料エリア・限定開示を組み合わせ、発案者が公開範囲を決められる構想。</p></article>
-</div>
-</div>
-</section>
-<section class="bottom-cta">
-<div class="wrap"><h2>アイデアを、<br>ひとりで終わらせない。</h2><p>PONは、アイデアを持つ人と、実現する力を持つ人が出会うためのプラットフォームを構想しています。</p><a class="button dark" href="#experience">もう一度デモを体験 ↗</a><p style="font-size:11px;margin-top:16px">PONは開発構想段階です。このページはコンセプトを体験するための試作です。</p></div>
-</section>
+<header class="top"><a class="brand" href="../index.html"><span class="mark">P</span>PON</a><nav class="nav"><a href="#idea">アイデアを探す</a><a href="#idea">アイデアを投稿する</a><a href="#comments">コメント</a></nav><div class="search">⌕　アイデア・キーワードで検索</div><span aria-label="プロフィール">👤</span></header>
+<div class="page">
+<main class="main" id="idea">
+<div class="intro"><div><span class="tag">🌱 エコ・環境</span><div class="h1">GreenCycle（グリーンサイクル）</div><p class="subtitle">家庭の生ごみをコンポストで堆肥化し、地域の農園で再利用する循環型エコサービス</p><div class="tags"><span># 環境保全</span><span># サステナブル</span><span># 地域活性化</span><span># 教育</span><span># ビジネス</span></div></div><div class="actions"><button class="btn primary" data-action="join">このアイデアに参加する　↗</button><button class="btn" data-action="share">↗ 共有</button></div></div>
+<div class="author"><span class="avatar">👩🏻</span><span><b>みどりん</b><br><span class="muted">2026/04/20 ・ アイデア投稿者</span></span><div class="social"><button class="pill" data-action="like">♡ <span id="likes">128</span></button><button class="pill" data-action="comments">☏ 24 コメント</button><button class="pill" data-action="save">♧ 保存</button></div></div>
+<section class="hero" aria-label="アイデアの循環を図解"><div class="hero-copy"><span class="eyebrow">IDEA VISUALIZATION</span><h2>ごみを、<br>“資源”に変える<br>新しい循環</h2><p>あなたの家の生ごみが、地域の土を育てる力に。GreenCycleは、暮らしからはじめるサステナブルな循環をつくります。</p><div class="mini-brand">◉ GreenCycle</div></div><div class="cycle"><span class="visual-note">文章から仕組みを図解 ✦</span>
+<svg viewBox="0 0 600 350" role="img" aria-label="家庭で生ごみを投入、コンポストで堆肥化、農園で活用、地域に還元する循環図">
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6Z" fill="#55b85d"/></marker><filter id="soft"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#2e7550" flood-opacity=".12"/></filter></defs>
+<path d="M205 82 Q290 22 365 83" fill="none" stroke="#62bd65" stroke-width="7" stroke-linecap="round" marker-end="url(#arrow)"/><path d="M437 135 Q480 183 427 226" fill="none" stroke="#62bd65" stroke-width="7" stroke-linecap="round" marker-end="url(#arrow)"/><path d="M350 278 Q275 325 207 274" fill="none" stroke="#62bd65" stroke-width="7" stroke-linecap="round" marker-end="url(#arrow)"/><path d="M139 224 Q95 175 143 130" fill="none" stroke="#62bd65" stroke-width="7" stroke-linecap="round" marker-end="url(#arrow)"/>
+<g filter="url(#soft)"><circle cx="170" cy="92" r="70" fill="#9bd85f" stroke="white" stroke-width="5"/><circle cx="398" cy="92" r="70" fill="#f5b45c" stroke="white" stroke-width="5"/><circle cx="398" cy="260" r="70" fill="#5bc5ae" stroke="white" stroke-width="5"/><circle cx="170" cy="260" r="70" fill="#b99be9" stroke="white" stroke-width="5"/><circle cx="284" cy="177" r="54" fill="#ffffff" stroke="#b8e8dc" stroke-width="4"/></g>
+<g fill="#fff" text-anchor="middle"><text x="170" y="48" font-size="21">1</text><text x="170" y="70" font-size="14">家庭で生ごみを</text><text x="170" y="88" font-size="14">投入</text><text x="170" y="124" font-size="31">🥬</text><text x="398" y="48" font-size="21">2</text><text x="398" y="70" font-size="14">コンポストで</text><text x="398" y="88" font-size="14">堆肥化</text><text x="398" y="124" font-size="31">♻️</text><text x="398" y="218" font-size="21">3</text><text x="398" y="240" font-size="14">農園で活用</text><text x="398" y="279" font-size="31">🌿</text><text x="170" y="218" font-size="21">4</text><text x="170" y="240" font-size="14">地域に還元</text><text x="170" y="279" font-size="31">🥕</text></g><g text-anchor="middle" fill="#23694c"><text x="284" y="160" font-size="13">生ごみが</text><text x="284" y="179" font-size="16">未来を育てる</text><text x="284" y="211" font-size="26">🌱</text></g><g fill="#397357" font-size="11" font-weight="700"><text x="450" y="174">小さな行動が</text><text x="450" y="190">大きな変化を</text><text x="450" y="206">生み出す！</text></g>
+</svg></div></section>
+<div class="grid2"><section class="panel"><h3><span class="ico">▣</span>アイデアの詳細</h3><p class="desc">家庭から出る生ごみを、手軽にコンポストで堆肥化し、地域の農園で再利用する循環型のエコサービスです。専用のコンポストキットとアプリを使って、誰でも簡単に始められます。環境にやさしいだけでなく、地域の農業やコミュニティの活性化にもつながる、持続可能な仕組みを目指します。</p><div class="benefits"><div class="benefit"><span class="emoji">🍃</span><b>環境にやさしい</b><small>生ごみの焼却量を減らし、CO₂削減に貢献。</small></div><div class="benefit"><span class="emoji">💧</span><b>コスト削減</b><small>ごみ処理の負担を減らし、家庭の負担も軽減。</small></div><div class="benefit"><span class="emoji">🤝</span><b>地域のつながり</b><small>農園や地域コミュニティとの交流が生まれる。</small></div><div class="benefit"><span class="emoji">📚</span><b>食育・教育</b><small>子どもたちに食と環境の大切さを伝える。</small></div></div></section>
+<section class="panel"><h3><span class="ico">▤</span>仕組み・利用の流れ</h3><div class="steps"><div class="step"><span class="num">1</span><div><b>生ごみを投入</b><p>キッチンで出た生ごみをコンポストに投入します。</p></div></div><div class="step"><span class="num">2</span><div><b>堆肥化（約1〜3か月）</b><p>専用コンポストで微生物が分解し、堆肥になります。</p></div></div><div class="step"><span class="num">3</span><div><b>農園で活用</b><p>できた堆肥を地域の農園で使用し、野菜や花を育てます。</p></div></div><div class="step"><span class="num">4</span><div><b>地域に還元</b><p>育てた作物を地域の食卓や直売所で販売・提供します。</p></div></div></div></section></div>
+<div class="grid2"><section class="panel"><h3><span class="ico">▥</span>想定される効果</h3><div class="metrics"><div class="metric"><div class="micon">🌱</div><b>120kg</b><span>年間CO₂削減</span><small>（1世帯あたり・試算例）</small></div><div class="metric"><div class="micon">🗑️</div><b>約40%</b><span>ごみ減量</span><small>（生ごみ重量比の仮説）</small></div><div class="metric"><div class="micon">♻️</div><b>20kg/月</b><span>堆肥の生成量</span><small>（1世帯あたり・想定）</small></div><div class="metric"><div class="micon">👥</div><b>300人</b><span>地域参加者</span><small>（1年後の目標例）</small></div></div><p class="muted" style="font-size:9px;margin:10px 0 0">※数値はデモ用の仮説・目標値であり、実測値や効果を保証するものではありません。</p></section>
+<section class="panel"><h3><span class="ico">♧</span>関わる人たち</h3><div class="stakeholders"><div class="stake"><div class="bubble">🏡</div><b>家庭</b><small>利用者</small></div><div class="stake"><div class="bubble">🌱</div><b>地域農園</b><small>生産者</small></div><div class="stake"><div class="bubble">👥</div><b>地域コミュニティ</b><small>協力者</small></div><div class="stake"><div class="bubble">🏢</div><b>企業・自治体</b><small>支援者</small></div></div></section></div>
+<div class="demo-banner"><span>✦</span><div><b>これは「アイデアの可視化」を体験するサンプルです。</b><br>文章から、仕組みの図解・利用フロー・効果指標・関係者マップを組み立てたイメージです。数値やコメントは架空で、投稿・保存・参加申請などはデモ動作です。</div></div>
 </main>
-<footer class="footer"><div class="wrap footer-inner"><a class="logo" href="#top" style="font-size:16px"><span class="logo-mark" style="width:27px;height:27px;border-radius:9px">P</span>PON</a><span>© PON concept demo · サンプル内容は架空です</span></div></footer>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<aside class="side"><section class="sidecard"><h3>▣ イメージ・ビジュアル</h3><div class="product-visual"><div class="garden">🪴🌿</div><div class="machine">♻️</div><div class="phone"><div class="phonein">GreenCycle<div class="gauge">78%</div>堆肥化中<br>↗ +12%</div></div></div><p class="sidecaption">コンポストキットと循環を記録するアプリの製品イメージ（コンセプト）</p></section>
+<section class="sidecard"><h3>♧ このアイデアに興味がある人</h3><div class="people"><div class="faces"><span>👩🏻</span><span>👨🏻</span><span>👩🏽</span><span>👨🏼</span></div><small>+124人（デモ表示）</small><button class="btn primary" data-action="join">参加する</button></div></section>
+<section class="sidecard" id="comments"><h3>☏ コメント・フィードバック</h3><div id="commentList"><div class="comment"><span class="avatar">👨🏻</span><div><b>たかし</b><time>2日前</time><p>すごくいいアイデアですね！地域の農園との連携があるのが素晴らしいです。ぜひ実現してほしいです！</p><span class="heart">♥ 12</span>　<span class="muted">返信</span></div></div><div class="comment"><span class="avatar">👩🏻</span><div><b>さくら</b><time>3日前</time><p>コンポストの使い方が初心者でもわかりやすそうで安心しました。子どもと一緒に取り組めそうです！</p><span class="heart">♥ 8</span>　<span class="muted">返信</span></div></div><div class="comment"><span class="avatar">👨🏽</span><div><b>ケンゴ</b><time>4日前</time><p>自治体との連携で補助金が使えたら、もっと広がりそうですね。ビジネスモデルも興味あります！</p><span class="heart">♥ 6</span>　<span class="muted">返信</span></div></div></div><form class="commentform" id="commentForm"><input id="commentInput" placeholder="コメントを入力..." aria-label="コメントを入力"><button type="submit" aria-label="コメントを追加">➤</button></form></section></aside>
+</div><footer class="footer">PON — アイデアを、実現する仲間へ。　｜　開発中のコンセプトデモ</footer><div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
-(() => {
- const toast = document.getElementById('toast');
- const searchInput = document.getElementById('idea-search');
- const filterButtons = [...document.querySelectorAll('[data-category]')];
- const posts = [...document.querySelectorAll('#idea-feed .post')];
- const resultsCount = document.getElementById('results-count');
- const emptyResults = document.getElementById('empty-results');
- const selectedCategories = new Set();
- function applyFilters() {
-   const query = (searchInput?.value || '').trim().toLocaleLowerCase('ja');
-   let shown = 0;
-   posts.forEach(post => {
-     const categories = (post.dataset.categories || '').split(',');
-     const categoryMatch = selectedCategories.size === 0 || categories.some(category => selectedCategories.has(category));
-     const textMatch = !query || post.textContent.toLocaleLowerCase('ja').includes(query) || categories.some(category => category.toLocaleLowerCase('ja').includes(query));
-     const visible = categoryMatch && textMatch;
-     post.hidden = !visible;
-     if (visible) shown++;
-   });
-   resultsCount.textContent = `サンプル投稿 ${shown}件 / 全${posts.length}件`;
-   emptyResults.classList.toggle('show', shown === 0);
- }
- filterButtons.forEach(button => button.addEventListener('click', () => {
-   const category = button.dataset.category;
-   if (category === 'all') selectedCategories.clear();
-   else if (selectedCategories.has(category)) selectedCategories.delete(category);
-   else selectedCategories.add(category);
-   filterButtons.forEach(item => {
-     const active = item.dataset.category === 'all' ? selectedCategories.size === 0 : selectedCategories.has(item.dataset.category);
-     item.setAttribute('aria-pressed', String(active));
-   });
-   applyFilters();
- }));
- searchInput?.addEventListener('input', applyFilters);
- let toastTimer;
- function notify(message) {
-   toast.textContent = message;
-   toast.classList.add('show');
-   clearTimeout(toastTimer);
-   toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
- }
- document.querySelectorAll('[data-visual]').forEach(button => {
-   button.addEventListener('click', () => {
-     const panel = document.getElementById('visual-' + button.dataset.visual);
-     const opening = !panel.classList.contains('open');
-     panel.classList.toggle('open', opening);
-     button.setAttribute('aria-expanded', String(opening));
-     button.textContent = opening ? '▧ ビジュアルを閉じる' : '▧ ビジュアルを見る';
-     if (opening) panel.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest'});
-   });
- });
- document.querySelectorAll('[data-toast]').forEach(button => button.addEventListener('click', () => notify(button.dataset.toast)));
-})();
-</script>
-</body>
-</html>
+const toast=document.getElementById('toast');let timer;function notify(t){toast.textContent=t;toast.classList.add('show');clearTimeout(timer);timer=setTimeout(()=>toast.classList.remove('show'),2400)}
+document.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click',()=>{const a=b.dataset.action;if(a==='like'){const n=document.getElementById('likes');n.textContent=Number(n.textContent)+1;b.style.background='#e7f8ed';notify('いいねをデモに反映しました')}else if(a==='save'){b.textContent=b.textContent.includes('保存済み')?'♧ 保存':'✓ 保存済み';notify('保存状態をデモ表示しました')}else if(a==='share'){if(navigator.clipboard){navigator.clipboard.writeText(location.href).then(()=>notify('このデモのURLをコピーしました')).catch(()=>notify('共有機能はデモ表示です'))}else notify('共有機能はデモ表示です')}else if(a==='comments'){document.getElementById('comments').scrollIntoView({behavior:'smooth'})}else notify('参加申請はデモです。実際のマッチング機能は未実装です')}));
+document.getElementById('commentForm').addEventListener('submit',e=>{e.preventDefault();const input=document.getElementById('commentInput');const value=input.value.trim();if(!value){notify('コメントを入力してください');return}const item=document.createElement('div');item.className='comment';const avatar=document.createElement('span');avatar.className='avatar';avatar.textContent='🙂';const body=document.createElement('div');const name=document.createElement('b');name.textContent='あなた（デモ）';const p=document.createElement('p');p.textContent=value;body.append(name,p);item.append(avatar,body);document.getElementById('commentList').prepend(item);input.value='';notify('コメントを画面に追加しました（保存はされません）')});
+</script></body></html>

@@ -58,6 +58,10 @@ function showApp(user) {
   if (!user) {
     ideas = [];
     ideaFeed.replaceChildren();
+    $('idea-detail').hidden = true;
+    $('detail-title').textContent = '';
+    $('detail-summary').textContent = '';
+    $('detail-body').textContent = '';
     closeEditor();
   }
 }
@@ -227,6 +231,7 @@ async function deleteIdea(idea) {
     const { data, error } = await supabase.from('ideas').delete().eq('id', idea.id).select('id').maybeSingle();
     if (error) throw error;
     if (!data) throw new Error('削除権限がないか、対象のアイデアが存在しません。');
+    $('idea-detail').hidden = true;
     message(feedMessage, 'アイデアを削除しました。', 'success');
     await loadIdeas();
   } catch (error) {

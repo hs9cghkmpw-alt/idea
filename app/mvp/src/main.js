@@ -337,6 +337,70 @@ $('search-input').addEventListener('input', renderIdeas);
 $('feed-filter').addEventListener('change', renderIdeas);
 $('refresh-feed').addEventListener('click', loadIdeas);
 
+function studioValue(id) {
+  return $(id).value.trim();
+}
+function studioSection(label, value) {
+  return label + "\\n" + (value || '未記入') + "\\n";
+}
+function resetStudio() {
+  $('studio-form').reset();
+  message($('studio-message'));
+}
+$('toggle-studio').addEventListener('click', () => {
+  $('studio-panel').hidden = false;
+  $('studio-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  $('studio-seed').focus({ preventScroll: true });
+});
+$('close-studio').addEventListener('click', () => { $('studio-panel').hidden = true; });
+$('studio-reset').addEventListener('click', () => {
+  if (window.confirm('Free Studio の入力内容をすべて消去しますか？')) resetStudio();
+});
+$('studio-form').addEventListener('submit', (event) => {
+  event.preventDefault();
+  const seed = studioValue('studio-seed');
+  if (!seed) {
+    message($('studio-message'), 'アイデアの種を入力してください。', 'error');
+    $('studio-seed').focus();
+    return;
+  }
+  const titleSeed = seed.replace(/\\s+/g, ' ').trim();
+  const title = titleSeed.length > 48 ? titleSeed.slice(0, 47) + '…' : titleSeed;
+  const problem = studioValue('studio-problem');
+  const audience = studioValue('studio-audience');
+  const solution = studioValue('studio-solution');
+  const value = studioValue('studio-value');
+  const needs = studioValue('studio-needs');
+  const next = studioValue('studio-next');
+  const summaryParts = [];
+  if (problem) summaryParts.push('課題：' + problem);
+  if (audience) summaryParts.push('対象：' + audience);
+  if (solution) summaryParts.push('解決案：' + solution);
+  const summary = (summaryParts.length ? summaryParts.join('\\n') : seed).slice(0, 500);
+  const body = [
+    studioSection('アイデアの種', seed),
+    studioSection('解決したい課題', problem),
+    studioSection('届けたい相手', audience),
+    studioSection('解決の仕組み', solution),
+    studioSection('生まれる価値・変化', value),
+    studioSection('必要な協力・資源', needs),
+    studioSection('次の一歩', next)
+  ].join('\\n').slice(0, 20000);
+  $('idea-id').value = '';
+  $('idea-title').value = title;
+  $('idea-category').value = 'その他';
+  $('idea-visibility').value = 'community';
+  $('idea-summary').value = summary;
+  $('idea-body').value = body;
+  $('editor-title').textContent = 'Free Studio から投稿';
+  $('publish-idea').textContent = '公開する';
+  $('editor-panel').hidden = false;
+  $('studio-panel').hidden = true;
+  message($('studio-message'), '整理しました。公開範囲と内容を確認してから投稿してください。', 'success');
+  $('editor-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  $('idea-title').focus({ preventScroll: true });
+});
+
 if (!configured) {
   setupWarning.hidden = false;
   authForm.querySelectorAll('input,button').forEach((el) => { el.disabled = true; });

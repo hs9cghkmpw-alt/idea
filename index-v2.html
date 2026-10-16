@@ -10,7 +10,37 @@
     :root{--ink:#171914;--paper:#f5f3e9;--white:#fffdf6;--muted:#5c6055;--lime:#d8fb58;--orange:#ff795d;--line:#d9d7ca;--darkline:#41443a;--max:1160px}
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;line-height:1.7}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:"Avenir Next","Helvetica Neue",Arial,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;line-height:1.75;font-feature-settings:"palt" 1}
+    h1,h2,h3,.logo,.btn,.price,.metric strong{font-family:"Arial Black","Avenir Next",Arial,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif}
+    h1,h2{font-weight:950;text-wrap:balance}
+    h1{letter-spacing:-.085em;line-height:1.02}
+    h2{letter-spacing:-.075em}
+    p,li{letter-spacing:.012em}
+    .eyebrow{font-family:"Avenir Next",Arial,sans-serif;font-size:10px;letter-spacing:2.2px}
+    .logo{letter-spacing:-2px;font-weight:1000}
+    .hero{gap:clamp(28px,4vw,58px);padding-top:78px;padding-bottom:58px}
+    .hero h1 span{display:inline-block;position:relative;text-shadow:3px 3px 0 #d8fb5830}
+    .hero h1 span:after{content:"";display:block;height:7px;background:var(--orange);width:74%;margin-top:7px;transform:skewX(-18deg)}
+    .hero-art{position:relative;overflow:hidden;background:radial-gradient(ellipse at 85% 0%,#3b4630 0,transparent 42%),#20231d;border-radius:3px;box-shadow:10px 10px 0 #d8fb58}
+    .idea-note,.preview{border-radius:3px}
+    .mock-shape{border-radius:2px}
+    .audience-strip{font-size:11px;letter-spacing:.04em}
+    section{padding:clamp(62px,7vw,92px) 0}
+    .two-cards{gap:20px}
+    .aud-card{border-radius:3px;transition:transform .2s ease,box-shadow .2s ease}
+    .aud-card:hover{transform:translateY(-4px);box-shadow:7px 7px 0 #d8fb58}
+    .step{border-radius:3px;position:relative;overflow:hidden}
+    .step:after{content:"";position:absolute;right:-18px;bottom:-32px;width:82px;height:82px;border:1px solid #d8fb5833;border-radius:50%}
+    .listing-card,.price-card,.faq-list article{border-radius:3px}
+    .price-card.featured{box-shadow:7px 7px 0 var(--lime)}
+    .btn{border-radius:3px;transition:transform .18s ease,box-shadow .18s ease}
+    .btn:hover{transform:translateY(-2px);box-shadow:4px 4px 0 #ff795d}
+    .closing{position:relative;overflow:hidden}
+    .closing-inner{position:relative}
+    .closing h2{letter-spacing:-.08em}
+    .closing .btn:hover{box-shadow:4px 4px 0 #ff795d}
+    ::selection{background:var(--lime);color:var(--ink)}
+    @media(prefers-reduced-motion:reduce){.aud-card,.btn{transition:none}.aud-card:hover,.btn:hover{transform:none}}
     a{color:inherit}a,button{-webkit-tap-highlight-color:transparent}
     a:focus-visible,button:focus-visible{outline:3px solid #2857c5;outline-offset:4px}
     .wrap{width:min(var(--max),calc(100% - 40px));margin-inline:auto}

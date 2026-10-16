@@ -240,3 +240,16 @@ Owner authoring APIs and reader APIs should remain distinct.
 - Authentication/session provider.
 - Data retention/deletion matrix and audit retention.
 - Hosting/database/object storage providers and operating-cost ceiling.
+
+
+## 8. Mandatory cross-document constraints
+
+Use [Authorization and Privacy Matrix](AUTHORIZATION-AND-PRIVACY-MATRIX.md) as the authorization source of truth, [Matching State Machine](MATCHING-STATE-MACHINE.md) for match transitions/consent, [Paid Content Transaction Model](PAID-CONTENT-TRANSACTION-MODEL.md) for purchases/entitlements, and [Security Baseline](SECURITY-BASELINE.md) for implementation/release controls.
+
+Additional requirements:
+- Keep provider events, purchase records, entitlements and refunds as separate records. Provider event IDs must be unique; webhook processing must be idempotent.
+- Store immutable paid-content versions and immutable match terms versions/digests. Consent must point to the exact terms version.
+- Add an explicit match disclosure grant/manifest rather than treating a match as blanket access to private profile or idea data.
+- Treat state changes as event-specific commands with server-side validation and DB transactions; do not permit generic client updates to authoritative state fields.
+- Define physical DB unique/check/foreign-key constraints and transaction boundaries before migrations. Proposed logical entities alone are not implementation-ready schema.
+- Protected content must be server-delivered only after authorization; no paid/private body in static assets, public storage, public metadata or shared caches.

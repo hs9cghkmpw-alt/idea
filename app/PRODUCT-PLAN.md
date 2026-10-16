@@ -15,11 +15,13 @@ PON helps ideas be shared, understood, developed, and circulated. It is not prim
 
 ## 3. Core experiences
 
+- Product-app access is account-based: login is required even to browse. The promotional site remains public and separate.
+
 1. Discover ideas through a feed, search, and categories.
 2. Publish an idea without needing to use Studio.
 3. Optionally structure and visualize an idea in Studio.
-4. Optionally set a paid section or subscription offering (commercial details not yet decided).
-5. Optionally express interest in collaboration or matching.
+4. Optionally configure a paid section on an idea; one-time purchase is the first design candidate, while subscriptions remain undecided.
+5. Express interest in collaboration/matching through a structured request and mutual-consent flow; real launch activation is subject to cost, safety, and legal gates.
 6. Establish a match only after both parties review and consent.
 
 ## 4. Studio
@@ -99,10 +101,10 @@ This is a future direction, not a requirement to introduce a monorepo or mobile 
 ## 11. Decisions still open
 
 - Dedicated app repository name and creation.
-- Exact MVP scope and launch criteria.
-- Content visibility and moderation policy details.
-- Paid content fees, creator share, subscriptions, and Studio pricing.
+- Detailed release gates and the exact point at which each in-scope domain is activated.
+- Exact visibility labels/grant semantics, moderation policy, deletion/retention, and appeal rules.
+- Paid content fees, creator share, refunds/taxes/payouts, whether subscriptions launch, and Studio pricing.
 - AI model/provider, usage limits, and cost controls.
-- Authentication and external identity verification provider.
+- Authentication provider/session design and external identity-verification provider.
 - Payment provider and legal review for any regulated-adjacent features.
-- Backend and hosting architecture.
+- Backend/hosting architecture, initial traffic assumptions, and acceptable monthly cost ceiling.

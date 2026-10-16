@@ -168,3 +168,14 @@
 - Operator actions are audited and moderation/verification data is restricted.
 - Account deletion revokes sessions and follows retention rules.
 - Variable-cost integrations have quotas, rate limits, and alerting before activation.
+
+
+## 10. Security and activation gates
+
+The feature requirements in this document must be implemented and tested against the [Authorization and Privacy Matrix](AUTHORIZATION-AND-PRIVACY-MATRIX.md), [Matching State Machine](MATCHING-STATE-MACHINE.md), [Paid Content Transaction Model](PAID-CONTENT-TRANSACTION-MODEL.md), and [Security Baseline](SECURITY-BASELINE.md).
+
+- Product routes requiring authentication is not enough: every API, resource, search result, preview, notification, export and file download must enforce server-side authorization.
+- Matching must not become established until both parties explicitly consent to the same immutable terms version and a single atomic server transaction confirms eligibility.
+- Paid access must not be granted by a browser redirect or client flag; only a verified and reconciled provider event may create the purchase/entitlement state.
+- Real-user activation is blocked until negative security tests, incident response ownership, backup restore tests, monitoring, feature kill switches and the relevant business/legal gates pass.
+- The static prototype is not evidence that authentication, privacy, payment, consent, or security controls are implemented.

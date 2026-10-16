@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171914">
+  <meta name="description" content="PONは、アイデアを見える形にして、資金・技術・仲間を持つ人とつなぐプラットフォームを開発中です。">
+  <title>PON — アイデアを、実現する仲間へ。</title>
+  <style>
+    :root{--ink:#171914;--paper:#f5f3e9;--white:#fffdf6;--muted:#5c6055;--lime:#d8fb58;--orange:#ff795d;--line:#d9d7ca;--darkline:#41443a;--max:1160px}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;line-height:1.7}
+    a{color:inherit}a,button{-webkit-tap-highlight-color:transparent}
+    a:focus-visible,button:focus-visible{outline:3px solid #2857c5;outline-offset:4px}
+    .wrap{width:min(var(--max),calc(100% - 40px));margin-inline:auto}
+    .top{background:var(--ink);color:var(--paper)}
+    header{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid var(--darkline)}
+    .logo{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-size:25px;font-weight:950;letter-spacing:-1.5px}
+    .mark{display:grid;place-items:center;width:29px;height:29px;background:var(--lime);border-radius:50%;color:var(--ink);font-size:17px}
+    nav{display:flex;align-items:center;gap:22px;font-size:12px;color:#e0e1d8}
+    nav a{text-decoration:none}nav a:hover{color:var(--lime)}
+    .nav-cta{border:1px solid #77796d;border-radius:4px;padding:8px 13px}
+    .status{display:inline-flex;gap:8px;align-items:center;border:1px solid #55584b;border-radius:99px;padding:6px 10px;font-size:11px;color:#e2e4d8}
+    .status b{width:7px;height:7px;border-radius:50%;background:var(--orange)}
+    .hero{padding:68px 0 44px;display:grid;grid-template-columns:1fr 1fr;gap:42px;align-items:center}
+    h1{font-size:clamp(44px,6vw,76px);line-height:1.08;letter-spacing:-.075em;margin:22px 0;font-weight:1000}
+    h1 span{color:var(--lime)}
+    .hero p{max-width:520px;color:#d2d4c9;font-size:16px;line-height:1.95}
+    .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:46px;padding:12px 16px;border-radius:4px;text-decoration:none;font-size:13px;font-weight:900}
+    .btn-lime{background:var(--lime);color:var(--ink)}.btn-outline{border:1px solid #77796d;color:#fff}
+    .small{font-size:12px;color:#aeb0a4}
+    .hero-art{background:#24271f;border:1px solid #41443a;border-radius:12px;padding:20px;box-shadow:0 20px 50px #0004}
+    .art-top{display:flex;justify-content:space-between;gap:12px;font-size:11px;color:#d3d5ca;padding-bottom:13px;border-bottom:1px solid #41443a}
+    .pipeline{display:grid;grid-template-columns:1fr 28px 1fr;gap:8px;align-items:center;margin:17px 0}
+    .idea-note{background:var(--white);color:var(--ink);padding:15px;border-radius:6px;min-height:155px}
+    .idea-note small,.preview small{font-size:10px;font-weight:900;letter-spacing:1px;color:#5e6257}
+    .idea-note strong{display:block;font-size:21px;line-height:1.4;margin-top:12px}
+    .arrow{text-align:center;color:var(--lime);font-size:23px}
+    .preview{background:#f0eee3;color:var(--ink);padding:12px;border-radius:6px;min-height:155px}
+    .browser{background:#dedccf;border-radius:4px;padding:6px;font-size:9px;color:#53574c}
+    .mock-title{font-size:17px;line-height:1.25;font-weight:950;margin-top:14px}
+    .mock-shape{height:43px;background:linear-gradient(115deg,var(--orange) 0 48%,#657b4d 48%);border-radius:4px;margin-top:9px}
+    .art-foot{font-size:11px;color:#c6c8bd}
+    .audience-strip{background:var(--lime);padding:12px 0;font-size:12px;font-weight:900}
+    .audience-strip .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+    section{padding:78px 0}
+    .eyebrow{font-size:11px;letter-spacing:1.6px;font-weight:950;color:#62665a}
+    h2{font-size:clamp(32px,4.3vw,52px);line-height:1.18;letter-spacing:-.065em;margin:10px 0 17px}
+    .lead{max-width:640px;color:#51554a;margin:0}
+    .two-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
+    .aud-card{background:var(--white);border:1px solid var(--line);padding:28px;border-radius:8px;display:flex;flex-direction:column;align-items:flex-start}
+    .aud-card .num{font-size:11px;font-weight:950;letter-spacing:1px;color:#696d61}
+    .aud-card h3{font-size:25px;letter-spacing:-.04em;margin:13px 0 8px}
+    .aud-card p{color:#55594e;margin:0 0 16px}
+    .aud-card ul{padding-left:19px;margin:0 0 24px;color:#41453b;font-size:14px}
+    .aud-card .btn{margin-top:auto}
+    .dark{background:var(--ink);color:var(--paper)}
+    .dark .eyebrow{color:var(--lime)}.dark .lead{color:#c5c7bc}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px}
+    .step{border:1px solid #41443a;background:#22251e;padding:22px;border-radius:7px}
+    .step b{display:grid;place-items:center;width:32px;height:32px;background:var(--lime);color:var(--ink);border-radius:50%;font-size:13px}
+    .step h3{font-size:18px;margin:17px 0 7px}.step p{font-size:13px;color:#c4c6bb;margin:0}
+    .listing{display:grid;grid-template-columns:.9fr 1.1fr;gap:36px;align-items:center;margin-top:30px}
+    .listing-copy p{color:#54584d}
+    .listing-card{background:var(--white);border:1px solid var(--line);border-radius:9px;padding:20px;box-shadow:0 15px 35px #17191412}
+    .listing-header{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .chip{display:inline-block;background:#e6f3b5;border-radius:99px;padding:5px 9px;font-size:10px;font-weight:900}
+    .sample-label{font-size:10px;color:#62665a}
+    .listing-card h3{font-size:23px;line-height:1.3;margin:13px 0 5px}
+    .listing-card>p{font-size:13px;color:#5b5f54}
+    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:17px 0}
+    .metric{background:#f0eee3;padding:12px;border-radius:5px}
+    .metric small{display:block;color:#5e6257;font-size:10px}.metric strong{font-size:15px}
+    .listing-note{font-size:11px;color:#6b6f63;border-top:1px solid var(--line);padding-top:12px}
+    .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
+    .trust article{border-top:2px solid var(--ink);padding-top:14px}
+    .trust h3{font-size:16px;margin:0 0 7px}.trust p{font-size:13px;color:#5a5e53;margin:0}
+    .closing{background:var(--lime);padding:58px 0}
+    .closing-inner{display:flex;align-items:center;justify-content:space-between;gap:25px}
+    .closing h2{margin:8px 0;font-size:clamp(32px,4.6vw,54px)}
+    .closing p{margin:0;max-width:660px;font-size:14px}
+    .btn-dark{background:var(--ink);color:#fff}
+    footer{background:var(--ink);color:#b8baaf;padding:24px 0;font-size:11px}
+    .footer{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    @media(max-width:800px){.hero{grid-template-columns:1fr;gap:25px;padding-top:48px}.steps{grid-template-columns:1fr}.listing{grid-template-columns:1fr}.trust{grid-template-columns:1fr 1fr}.closing-inner{align-items:flex-start;flex-direction:column}}
+    @media(max-width:560px){.wrap{width:calc(100% - 32px)}header{min-height:66px}nav a:not(.nav-cta){display:none}.hero{padding:38px 0 32px}h1{font-size:clamp(42px,12vw,60px)}.hero p{font-size:14px}.pipeline{grid-template-columns:1fr 20px 1fr;gap:5px}.idea-note,.preview{padding:10px;min-height:145px}.idea-note strong{font-size:17px}.mock-title{font-size:14px}.art-top{font-size:10px}.audience-strip .wrap{justify-content:flex-start}section{padding:58px 0}.two-cards{grid-template-columns:1fr}.aud-card{padding:22px}.trust{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}.closing{padding:48px 0}.btn{width:100%;white-space:normal;text-align:center}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="wrap">
+      <header>
+        <a class="logo" href="#top" aria-label="PON トップ"><span class="mark" aria-hidden="true">P</span>PON</a>
+        <nav aria-label="メインナビゲーション">
+          <a href="#how">仕組み</a><a href="#for-who">誰のため？</a><a href="#trust">安心への設計</a><a class="nav-cta" href="#status">開発状況 ↗</a>
+        </nav>
+      </header>
+      <main id="top">
+        <section class="hero" aria-labelledby="hero-title">
+          <div>
+            <div class="status"><b aria-hidden="true"></b> 開発初期段階 / コンセプト公開</div>
+            <h1 id="hero-title">アイデアを、<br><span>見える形に。</span><br>実現する仲間へ。</h1>
+            <p>「こんなサービスを作りたい」「この不便を解決したい」。そのアイデアを、文章だけで終わらせない。画面イメージにして伝え、資金・技術・人材を持つ人と出会う。PONは、アイデアから実現への一歩をつくるプラットフォームを開発しています。</p>
+            <div class="actions"><a class="btn btn-lime" href="#for-who">自分の使い方を見つける ↘</a><a class="btn btn-outline" href="#how">どうやって形にする？</a></div>
+            <p class="small">暮らしの工夫から、新しい事業のタネまで。最初から幅広いアイデアを対象にします。</p>
+          </div>
+          <div class="hero-art" role="img" aria-label="文章のアイデアが、模擬サイトの画面イメージに変わる概念図">
+            <div class="art-top"><span>FROM IDEA TO OPPORTUNITY</span><span>CONCEPT DEMO</span></div>
+            <div class="pipeline">
+              <div class="idea-note"><small>YOUR IDEA</small><strong>「地域のお店の<br>空席を活用したい」</strong></div>
+              <div class="arrow" aria-hidden="true">→</div>
+              <div class="preview"><small>VISUAL CONCEPT</small><div class="browser">● ● ●　pon / preview</div><div class="mock-title">近くのお店の<br>空席を、新しい体験に。</div><div class="mock-shape"></div></div>
+            </div>
+            <div class="art-foot">※ 説明用に作成した概念イメージです。現時点でAI生成・投稿・マッチング機能は稼働していません。</div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <div class="audience-strip"><div class="wrap"><span>発案者も。</span><span>出資・協業先を探す人も。</span><span>技術や経験を生かしたい人も。</span><span>ひとつの場所で。</span></div></div>
+
+  <section id="for-who">
+    <div class="wrap">
+      <div class="eyebrow">TWO SIDES, ONE PLATFORM</div>
+      <h2>アイデアを出す人と、<br>可能性を探す人。</h2>
+      <p class="lead">PONは、どちらか一方のためだけの場所ではありません。提案する人にも、探す人にも、参加する理由があります。</p>
+      <div class="two-cards">
+        <article class="aud-card">
+          <div class="num">01 / IDEA OWNERS</div><h3>「私のアイデア、どう？」</h3>
+          <p>構想はある。でも、一人ですべてを作るのは難しい。そんなときに。</p>
+          <ul><li>文章からアイデアの画面イメージを作る</li><li>必要な資金や協力条件を整理して見せる</li><li>出資希望者・開発者・事業パートナーを募る</li></ul>
+          <a class="btn btn-dark" href="#how">アイデアを形にする流れ ↗</a>
+        </article>
+        <article class="aud-card">
+          <div class="num">02 / IDEA SEEKERS</div><h3>「何か面白い話、ない？」</h3>
+          <p>出資したい。新しい事業を探したい。技術や販路を生かせる相手に出会いたい。</p>
+          <ul><li>分野や必要資金、募集内容から探す</li><li>画面イメージを見て構想をつかむ</li><li>出資・共同開発・技術提供などを提案する</li></ul>
+          <a class="btn btn-dark" href="#sample">アイデアの掲載イメージ ↗</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark" id="how">
+    <div class="wrap">
+      <div class="eyebrow">FROM WORDS TO COLLABORATION</div>
+      <h2>思いつきから、<br>一緒に動ける企画へ。</h2>
+      <p class="lead">事業計画書や完成品を持っている人だけが参加できる場所にはしない。アイデアを伝え、可能性を探るところから始めます。</p>
+      <div class="steps">
+        <article class="step"><b>1</b><h3>文章でアイデアを伝える</h3><p>自由な文章から始める。整理されていなくても、専門用語が分からなくてもいい。</p></article>
+        <article class="step"><b>2</b><h3>画面イメージにする</h3><p>構想をHTMLの模擬サイトや画面案に変換。触れる見本が、アイデアを伝える材料になる。</p></article>
+        <article class="step"><b>3</b><h3>資金・技術・仲間を募る</h3><p>必要なものや協力条件を示し、興味を持った人から質問や協力の申し出を受ける。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="sample">
+    <div class="wrap">
+      <div class="eyebrow">A LISTING, AT A GLANCE</div>
+      <h2>アイデアが、伝わる募集ページに。</h2>
+      <p class="lead">投稿する人は「何を実現したいか」を伝え、探す人は「自分がどう関われるか」を判断しやすくする。掲載画面では、夢だけでなく条件や未確認事項も一緒に見せる構想です。</p>
+      <div class="listing">
+        <div class="listing-copy"><h3>画面だけでは終わらせない。</h3><p>模擬サイトに加えて、必要資金、費用の根拠、募集したい協力、実現段階を並べる想定です。AIの推測と、確認済みの事実を混ぜない設計を目指します。</p><p>出資・協業・技術提供などの具体的な取引機能は、信頼・安全・法務面を確認しながら段階的に検討します。</p></div>
+        <article class="listing-card">
+          <div class="listing-header"><span class="chip">掲載イメージ / 仮の例</span><span class="sample-label">事業アイデア</span></div>
+          <h3>地域の小さなお店と、空き時間を活用したい人をつなぐ</h3>
+          <p>空席や空き時間を、体験・作業・交流の機会に変えるサービス構想。</p>
+          <div class="metrics"><div class="metric"><small>必要資金</small><strong>要見積もり</strong></div><div class="metric"><small>募集したい協力</small><strong>開発・実証</strong></div><div class="metric"><small>現在の段階</small><strong>構想段階</strong></div></div>
+          <div class="listing-note">金額・収益・需要は、根拠や検証状況とともに表示する想定です。このサンプルは架空の概念例で、募集は行っていません。</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="trust">
+    <div class="wrap">
+      <div class="eyebrow">BUILT WITH CARE</div>
+      <h2>挑戦しやすさと、<br>安心のバランスを。</h2>
+      <p class="lead">アイデアを開くことと、すべてをさらけ出すことは別。情報をどこまで誰に見せるかを、自分で選べる仕組みを目指します。</p>
+      <div class="trust">
+        <article><h3>公開範囲を選べる</h3><p>下書き・限定公開・公開を区別し、本人の明示的な操作なしにアイデアを公開しない設計を目指します。</p></article>
+        <article><h3>個人情報は段階的に</h3><p>マッチ前に個人の連絡先を見せない。本人確認は外部サービスの活用を検討し、書類画像をPONに保存しない方針です。</p></article>
+        <article><h3>事実と予測を分ける</h3><p>模擬画面やAIの推計は、実績や事業の成功保証ではありません。費用・収益・未検証の仮説を区別します。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark" id="status">
+    <div class="wrap">
+      <div class="eyebrow">CURRENT STATUS</div>
+      <h2>いまは、構想と試作を育てている段階。</h2>
+      <p class="lead">PONは開発初期段階です。このページは目指す体験を説明するコンセプトLPであり、投稿・AIによるHTML生成・出資者検索・マッチングはまだ稼働していません。</p>
+      <div class="steps">
+        <article class="step"><b>✓</b><h3>コンセプトの整理</h3><p>発案者と探索者、両方の利用目的を定義。</p></article>
+        <article class="step"><b>→</b><h3>体験と試作の設計</h3><p>投稿・可視化・募集ページの流れを具体化。</p></article>
+        <article class="step"><b>…</b><h3>検証しながら開発</h3><p>費用、信頼、安全、実現可能性を確認して段階的に進める。</p></article>
+      </div>
+      <p class="small">現時点で出資募集や協業の申し込みは受け付けていません。掲載イメージは説明用の概念例です。</p>
+    </div>
+  </section>
+
+  <section class="closing">
+    <div class="wrap closing-inner">
+      <div><div class="eyebrow">IDEAS NEED A NEXT STEP</div><h2>そのアイデア、<br>頭の中だけに置かない。</h2><p>PONは、アイデアを見える形にし、実現の可能性を探るための場所を目指しています。</p></div>
+      <a class="btn btn-dark" href="prototype/index.html">現在のローカル試作を見る ↗</a>
+    </div>
+  </section>
+  <footer><div class="wrap footer"><div><strong style="color:#fff;font-size:18px">PON</strong><div>思いついたら、ポン。</div></div><div>コンセプト・試作段階のページです。実際の投稿受付・出資募集・マッチングは行っていません。</div></div></footer>
+</body>
+</html>

@@ -169,3 +169,13 @@ Real payments, paid AI, identity verification, and real matching must not be act
 ## 12. Acceptance principle
 
 No feature is considered production-ready merely because the screen works. It must also have defined permissions, persistence, error behavior, abuse handling, tests, operational visibility, and an honest user-facing description of what it does.
+
+
+## Security and transactional architecture constraints
+
+- Authorization is server-side and deny-by-default. All reads/writes, search, previews, notifications, exports and file downloads use the same resource policy; see [Authorization and Privacy Matrix](AUTHORIZATION-AND-PRIVACY-MATRIX.md).
+- Paid content is stored and served separately from public previews. Entitlement is derived from verified provider events and authoritative server records; see [Paid Content Transaction Model](PAID-CONTENT-TRANSACTION-MODEL.md).
+- Matching uses immutable terms versions and explicit consent records. A match is committed atomically only when both parties consent to the same current version; see [Matching State Machine](MATCHING-STATE-MACHINE.md).
+- Post-commit notifications use an outbox/durable queue. Webhooks and retryable commands are idempotent. Audit events are append-only to ordinary application roles.
+- Production readiness includes secret management, least-privilege CI/CD, security monitoring, encrypted backups and restore drills, incident response, and kill switches; see [Security Baseline](SECURITY-BASELINE.md).
+- These are architecture requirements, not claims about the current static prototype.

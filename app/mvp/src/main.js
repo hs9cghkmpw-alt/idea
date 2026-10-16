@@ -341,7 +341,7 @@ function studioValue(id) {
   return $(id).value.trim();
 }
 function studioSection(label, value) {
-  return label + "\\n" + (value || '未記入') + "\\n";
+  return label + "\n" + (value || '未記入') + "\n";
 }
 function resetStudio() {
   $('studio-form').reset();
@@ -364,7 +364,7 @@ $('studio-form').addEventListener('submit', (event) => {
     $('studio-seed').focus();
     return;
   }
-  const titleSeed = seed.replace(/\\s+/g, ' ').trim();
+  const titleSeed = seed.replace(/\s+/g, ' ').trim();
   const title = titleSeed.length > 48 ? titleSeed.slice(0, 47) + '…' : titleSeed;
   const problem = studioValue('studio-problem');
   const audience = studioValue('studio-audience');
@@ -376,7 +376,7 @@ $('studio-form').addEventListener('submit', (event) => {
   if (problem) summaryParts.push('課題：' + problem);
   if (audience) summaryParts.push('対象：' + audience);
   if (solution) summaryParts.push('解決案：' + solution);
-  const summary = (summaryParts.length ? summaryParts.join('\\n') : seed).slice(0, 500);
+  const summary = (summaryParts.length ? summaryParts.join('\n') : seed).slice(0, 500);
   const body = [
     studioSection('アイデアの種', seed),
     studioSection('解決したい課題', problem),
@@ -385,7 +385,7 @@ $('studio-form').addEventListener('submit', (event) => {
     studioSection('生まれる価値・変化', value),
     studioSection('必要な協力・資源', needs),
     studioSection('次の一歩', next)
-  ].join('\\n').slice(0, 20000);
+  ].join('\n').slice(0, 20000);
   $('idea-id').value = '';
   $('idea-title').value = title;
   $('idea-category').value = 'その他';

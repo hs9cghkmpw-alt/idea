@@ -56,23 +56,21 @@ select is(
   'Member B cannot read member A draft'
 );
 
+update public.ideas set title = 'tampered by B'
+where id = '20000000-0000-4000-8000-000000000001';
+
 select is(
-  (with changed as (
-    update public.ideas set title = 'tampered by B'
-    where id = '20000000-0000-4000-8000-000000000001'
-    returning id
-  ) select count(*) from changed),
-  0::bigint,
+  (select title from public.ideas where id = '20000000-0000-4000-8000-000000000001'),
+  'RLS public fixture',
   'Member B cannot update member A idea'
 );
 
+delete from public.ideas
+where id = '20000000-0000-4000-8000-000000000001';
+
 select is(
-  (with removed as (
-    delete from public.ideas
-    where id = '20000000-0000-4000-8000-000000000001'
-    returning id
-  ) select count(*) from removed),
-  0::bigint,
+  (select count(*) from public.ideas where id = '20000000-0000-4000-8000-000000000001'),
+  1::bigint,
   'Member B cannot delete member A idea'
 );
 

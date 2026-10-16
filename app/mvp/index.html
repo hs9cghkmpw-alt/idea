@@ -90,6 +90,13 @@
           </form>
         </section>
 
+        <section id="idea-detail" class="panel detail-panel" hidden>
+          <div class="panel-heading"><div><p class="eyebrow">IDEA DETAILS</p><h2 id="detail-title"></h2></div><button id="close-detail" class="button button-quiet" type="button">閉じる</button></div>
+          <div id="detail-meta" class="detail-meta"></div>
+          <p id="detail-summary" class="detail-summary"></p>
+          <div class="detail-body-wrap"><h3>アイデアの詳細</h3><div id="detail-body" class="detail-body"></div></div>
+        </section>
+
         <section class="feed-section">
           <div class="feed-heading"><div><p class="eyebrow">DISCOVER</p><h2>アイデアの広場</h2></div><span id="idea-count" class="count">0 件</span></div>
           <div class="feed-tools"><label class="search-box"><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="タイトル・概要を検索" aria-label="アイデアを検索"></label><select id="feed-filter" aria-label="表示するアイデア"><option value="all">公開アイデア＋自分の非公開</option><option value="community">公開アイデア</option><option value="mine">自分のアイデア</option></select><button id="refresh-feed" class="button button-quiet" type="button">再読み込み</button></div>

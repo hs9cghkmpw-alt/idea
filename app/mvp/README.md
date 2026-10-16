@@ -34,7 +34,7 @@ npm run dev
 
 Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in `.env.local` using the project's public URL and publishable/anon client key. Never use the `service_role` key or any secret key in `.env.local` for this browser app. The publishable/anon key is expected to be visible to users; RLS is what protects data.
 
-Apply `supabase/migrations/001_initial_schema.sql` to the test project using the Supabase SQL Editor or Supabase CLI. Review the SQL before running it. For a CLI workflow, link only the dedicated test project and run the migration through your team's normal migration process.
+Apply `supabase/migrations/001_initial_schema.sql` to the local Supabase database using the CLI below, or to a dedicated remote test project using the SQL Editor. Review the SQL before running it. Never run the test fixtures or unreviewed migrations against production.\n\nFor local database tests, install Docker Desktop and the Supabase CLI, then from `app/mvp` run:\n\n```powershell\nsupabase start -x studio,inbucket,imgproxy,edge-runtime,logflare,vector\nsupabase test db\n```\n\nThe database test suite creates two disposable test users inside a transaction and checks that another member cannot read private ideas or drafts, update/delete another member's idea, or spoof an owner ID. It also checks anonymous table privileges and owner access. These tests are run in CI; they do not replace manual API/browser tests or an external security review.
 
 In Supabase Auth settings, configure email confirmation and allowed redirect URLs for local testing. For production, configure the exact deployed app URLs and review password policy, rate limits, abuse controls, backup settings, and data region.
 

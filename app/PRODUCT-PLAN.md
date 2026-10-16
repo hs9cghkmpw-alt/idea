@@ -108,3 +108,10 @@ This is a future direction, not a requirement to introduce a monorepo or mobile 
 - Authentication provider/session design and external identity-verification provider.
 - Payment provider and legal review for any regulated-adjacent features.
 - Backend/hosting architecture, initial traffic assumptions, and acceptable monthly cost ceiling.
+
+
+## Security-first activation criteria
+
+Feature design can cover all four domains while launch activation remains gated. Before real users are admitted, satisfy the [Security Baseline](docs/SECURITY-BASELINE.md) and review the [Authorization and Privacy Matrix](docs/AUTHORIZATION-AND-PRIVACY-MATRIX.md), [Matching State Machine](docs/MATCHING-STATE-MACHINE.md), and [Paid Content Transaction Model](docs/PAID-CONTENT-TRANSACTION-MODEL.md).
+
+No launch approval based on prototype appearance alone. Require server-enforced authorization, negative tests, verified/idempotent payment events, immutable consent/versioning, operational moderation and incident ownership, monitoring, backup restore verification, and explicit feature-by-feature release approval. Paid checkout and legally sensitive matching categories remain disabled until their separate business/legal gates are approved.

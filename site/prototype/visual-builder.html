@@ -43,6 +43,41 @@ body{background:var(--paper);color:var(--ink);font-family:Inter,-apple-system,Bl
 .bottom-note,.foot{color:var(--muted)!important}
 @media(max-width:760px){.shell{padding-left:16px!important;padding-right:16px!important}.topbar{height:auto!important}.topbar-inner{padding-top:12px;padding-bottom:12px}.toplinks{gap:8px!important;flex-wrap:wrap}.hero{padding-top:32px!important}.workspace{gap:16px!important}}
 
+
+/* Studio preview: shared PON visual language + meaningful idea flow */
+.site{--site-ink:#18352b!important;background:#fff!important;border-color:#e1ebe4!important;border-radius:18px!important;box-shadow:0 12px 36px #1c49300c!important;color:var(--site-ink)!important}
+.site-nav{background:#ffffffed!important;border-color:#e1ebe4!important;padding:16px 22px!important}
+.site-logo{color:#18352b!important}.site-logo-mark{background:var(--accent)!important;color:#fff!important;border-radius:9px!important}
+.site-nav-links{color:#6c8178!important}.site-nav-cta{background:var(--accent)!important;color:#fff!important;border-radius:999px!important}
+.site-hero{background:var(--hero-bg)!important;border-bottom:1px solid #e1ebe4!important}
+.site-kicker{color:#087b4a!important}.site-kicker:before{background:var(--accent2)!important}
+.site-title{color:#18352b!important;letter-spacing:-.055em!important}
+.site-desc{color:#52685e!important}
+.site-cta{background:var(--accent)!important;color:#fff!important;border-radius:999px!important;box-shadow:0 8px 18px #20aa691c!important}.site-cta b{color:#fff!important}
+.art{background:var(--art-bg)!important;border:1px solid #d6e9dd!important;border-radius:16px!important}
+.art-orbit{border-color:#20aa6925!important}.art-orbit:after{border-color:#20aa6925!important}
+.art-card{border-color:#e1ebe4!important;border-radius:14px!important;box-shadow:0 12px 25px #1c493012!important;transform:rotate(-1deg)!important}
+.art-graphic{height:auto!important;min-height:180px!important;padding:12px!important;border-radius:12px!important;background:linear-gradient(145deg,#f7fcf8,#e4f5ea)!important;display:flex!important;flex-direction:column!important;justify-content:center!important;gap:7px!important}
+.art-graphic:before,.art-graphic:after{display:none!important}
+.flow-node{position:relative;display:flex;align-items:center;gap:9px;min-height:36px;padding:8px 10px;background:#fff;border:1px solid #d7e8dd;border-radius:10px;color:#18352b;font-size:9px;box-shadow:0 3px 10px #1c493008}
+.flow-node span{display:grid;place-items:center;flex:0 0 20px;width:20px;height:20px;border-radius:7px;background:#e6f7ec;color:#087b4a;font-size:8px;font-weight:900}
+.flow-node b{font-size:9px;line-height:1.45;overflow-wrap:anywhere}
+.flow-node-main{border-color:var(--accent)!important;background:#fff!important}.flow-node-main span{background:var(--accent)!important;color:#fff!important}
+.flow-node-end{background:#f2faf5!important}
+.flow-arrow{text-align:center;color:#20aa69;font-weight:900;font-size:12px;line-height:1}
+.art-foot i{background:#e6f1e9!important;border-radius:999px!important}.art-foot i:last-child{background:var(--accent)!important}
+.art-note{background:#dff7b5!important;color:#087b4a!important;border:1px solid #ccebd8!important;border-radius:14px!important;transform:rotate(3deg)!important}
+.site-strip{border-color:#e1ebe4!important}.site-strip span{color:#52685e!important}.site-strip b{color:var(--accent)!important}
+.site-features{background:#fff!important}.site-section-head h3{color:#18352b!important}.site-section-head p{color:#6c8178!important}
+.feature{border-color:#e1ebe4!important;border-radius:14px!important}.feature:nth-child(2){background:var(--hero-bg)!important}
+.feature-icon{background:var(--accent)!important;color:#fff!important;border-radius:10px!important}
+.feature h4{color:#18352b!important}.feature p{color:#5c7167!important}
+.site-proof{background:#f8fcf9!important;border-color:#e1ebe4!important}.site-proof h3{color:#18352b!important}
+.proof-point{border-left-color:var(--accent)!important;border-radius:10px!important;background:#fff!important}
+.proof-point strong{color:#18352b!important}.proof-point span{color:#6c8178!important}
+.site-bottom{background:#18352b!important;border-radius:0 0 16px 16px!important}.site-bottom .mini-cta{border-radius:999px!important;background:var(--accent)!important;border-color:transparent!important;color:#fff!important}
+@media(max-width:760px){.art-graphic{min-height:160px!important}.site-nav{padding:12px 14px!important}.site-hero{gap:18px!important}}
+
 </style>
 </head>
 <body>
@@ -61,14 +96,14 @@ body{background:var(--paper);color:var(--ink);font-family:Inter,-apple-system,Bl
 <div class="field wide"><label for="idea-cta">今、集めたいもの</label><select id="idea-cta"><option>実証に協力してほしい</option><option>開発パートナーを探したい</option><option>意見・アドバイスがほしい</option><option>一緒に事業化したい</option><option>スポンサー・資金の可能性を探りたい</option></select></div>
 <div class="field wide"><label for="idea-stage">いまの段階</label><select id="idea-stage"><option value="concept">構想・アイデア段階</option><option value="prototype">試作品をつくっている</option><option value="test">小さく検証している</option><option value="growth">実装・展開を考えている</option></select></div>
 <div class="divider"></div><div class="group-label"><span>3</span>見た目の方向性</div>
-<div class="themes" role="group" aria-label="デザインテーマ"><button class="theme" type="button" data-theme="lime" aria-pressed="true" style="--swatch-a:#d9f36a;--swatch-b:#f28b55"><i></i>エディトリアル<span>大胆・個性的</span></button><button class="theme" type="button" data-theme="orange" aria-pressed="false" style="--swatch-a:#ffb59b;--swatch-b:#d96b43"><i></i>エネルギー<span>熱量・挑戦</span></button><button class="theme" type="button" data-theme="blue" aria-pressed="false" style="--swatch-a:#c8ddff;--swatch-b:#547ca8"><i></i>クリーン<span>信頼・明快</span></button></div>
+<div class="themes" role="group" aria-label="デザインテーマ"><button class="theme" type="button" data-theme="green" aria-pressed="true" style="--swatch-a:#20aa69;--swatch-b:#dff7b5"><i></i>GreenCycle<span>共感・循環</span></button><button class="theme" type="button" data-theme="sun" aria-pressed="false" style="--swatch-a:#f6a342;--swatch-b:#ffe5b8"><i></i>サンライト<span>活気・前向き</span></button><button class="theme" type="button" data-theme="mint" aria-pressed="false" style="--swatch-a:#5bc5ae;--swatch-b:#e5f4ff"><i></i>ミント<span>安心・明快</span></button></div>
 <div class="editor-actions"><button class="btn btn-primary" id="generate" type="button">プレビューを更新 <span>↗</span></button><button class="btn btn-quiet" id="example" type="button">別のアイデア例を読み込む</button></div><p class="helper helper-wide">入力を変えるとプレビューに反映されます。生成ボタンは表示を更新し、AI生成を行うものではありません。</p>
 </div></aside>
 <section class="preview-area" aria-labelledby="preview-heading"><div class="preview-head"><div class="preview-heading"><span class="live-dot" aria-hidden="true"></span><div><h2 id="preview-heading">企画ページのプレビュー</h2><p id="preview-status" role="status" aria-live="polite">サンプルを表示中 — 編集すると見た目が更新されます</p></div></div><div class="preview-tools" role="group" aria-label="表示サイズ"><button type="button" data-view="desktop" aria-pressed="true">▣ デスクトップ</button><button type="button" data-view="mobile" aria-pressed="false">▯ スマートフォン</button></div></div>
 <div class="preview-frame"><div class="canvas-label"><span>LIVE PREVIEW / 01</span><span>CONCEPT PAGE · NOT PUBLISHED</span></div>
 <div class="site" id="site-preview">
 <div class="site-nav"><div class="site-logo"><span class="site-logo-mark">↗</span><span id="p-brand">空席ラボ</span></div><div class="site-nav-links"><span>ABOUT</span><span>WHY NOW</span><span>JOIN US</span></div><div class="site-nav-cta" id="p-nav-cta">企画に参加する ↗</div></div>
-<div class="site-hero"><div><div class="site-kicker" id="p-kicker">A NEW LOCAL EXPERIENCE</div><h2 class="site-title" id="p-title">まちの空席を、<br>新しい体験に。</h2><p class="site-desc" id="p-description">地域のお店の空席や空き時間と、場所を探している人をつなぐ。お店は空き時間を活用でき、利用者は新しい場所や体験に出会える。</p><span class="site-cta"><span id="p-cta">実証に協力してほしい</span><b>↗</b></span></div><div class="art" aria-label="企画の抽象的なビジュアル"><div class="art-orbit"></div><div class="art-card"><div class="art-top"><span id="p-art-label">A SMALL IDEA, BIG CHANGE</span><span class="art-balls"><i></i><i></i><i></i></span></div><div class="art-graphic"></div><div class="art-foot"><i></i><i></i></div></div><div class="art-note">IDEA<br>IN<br>ACTION</div></div></div>
+<div class="site-hero"><div><div class="site-kicker" id="p-kicker">A NEW LOCAL EXPERIENCE</div><h2 class="site-title" id="p-title">まちの空席を、<br>新しい体験に。</h2><p class="site-desc" id="p-description">地域のお店の空席や空き時間と、場所を探している人をつなぐ。お店は空き時間を活用でき、利用者は新しい場所や体験に出会える。</p><span class="site-cta"><span id="p-cta">実証に協力してほしい</span><b>↗</b></span></div><div class="art" aria-label="企画の抽象的なビジュアル"><div class="art-orbit"></div><div class="art-card"><div class="art-top"><span id="p-art-label">A SMALL IDEA, BIG CHANGE</span><span class="art-balls"><i></i><i></i><i></i></span></div><div class="art-graphic" id="p-art-graphic" aria-label="アイデアの価値が生まれる流れ"></div><div class="art-foot"><i></i><i></i></div></div><div class="art-note">IDEA<br>IN<br>ACTION</div></div></div>
 <div class="site-strip"><span><b>01 /</b>身近な課題から</span><span><b>02 /</b>小さく試せる</span><span><b>03 /</b>一緒に育てる</span></div>
 <div class="site-features"><div class="site-section-head"><div><small>WHY IT MATTERS</small><h3>この企画が生み出す価値。</h3></div><p>大きな完成図だけでなく、最初の一歩から考える。</p></div><div class="feature-grid"><article class="feature"><div class="feature-icon">↗</div><h4 id="p-feature1-title">届けたい相手</h4><p id="p-feature1">地域のお店・近くで場所を探す人に向けた、新しい選択肢。</p></article><article class="feature"><div class="feature-icon">◎</div><h4 id="p-feature2-title">届けたい価値</h4><p id="p-feature2">空いている時間や場所を、価値に変える。</p></article><article class="feature"><div class="feature-icon">＋</div><h4 id="p-feature3-title">次の一歩</h4><p id="p-feature3">実証に協力してほしい。まずは小さく、共に試す。</p></article></div></div>
 <div class="site-proof"><div><small>THE NEXT STEP</small><h3 id="p-stage-title">構想から、小さな実証へ。</h3></div><div class="proof-points"><div class="proof-point"><strong>まずは仮説を言葉にする</strong><span>誰のどんな課題を解くのか</span></div><div class="proof-point"><strong>必要な仲間を見つける</strong><span>意見・技術・協力先を探す</span></div></div></div>
@@ -85,8 +120,8 @@ body{background:var(--paper);color:var(--ink);font-family:Inter,-apple-system,Bl
 'use strict';
 var $=function(id){return document.getElementById(id)};
 var fields=['idea-title','idea-description','idea-audience','idea-benefit','idea-cta','idea-stage'];
-var theme='lime';
-var themes={lime:{accent:'#d9f36a',accent2:'#f28b55',hero:'#f5f3e9',art:'#e1ead9'},orange:{accent:'#ffb59b',accent2:'#d96b43',hero:'#fff0e9',art:'#f6d9cc'},blue:{accent:'#c8ddff',accent2:'#547ca8',hero:'#f0f5ff',art:'#dce8f5'}};
+var theme='green';
+var themes={green:{accent:'#20aa69',accent2:'#f6a342',hero:'#f3f7f4',art:'#e5f4eb',ink:'#18352b'},sun:{accent:'#f6a342',accent2:'#20aa69',hero:'#fff8ed',art:'#ffedce',ink:'#18352b'},mint:{accent:'#5bc5ae',accent2:'#087b4a',hero:'#f0faf7',art:'#e5f4ff',ink:'#18352b'}};
 var stages={concept:{title:'構想から、小さな実証へ。',copy:'構想・アイデア段階のコンセプトページです。',steps:['まずは仮説を言葉にする','必要な仲間を見つける'],sub:['誰のどんな課題を解くのか','意見・技術・協力先を探す']},prototype:{title:'試作品を、次の対話のきっかけに。',copy:'試作品づくりを進めている段階のコンセプトページです。',steps:['試作品を見せて反応を得る','改善するポイントを見つける'],sub:['伝わり方と使いやすさを確かめる','利用者の声から優先順位をつける']},test:{title:'小さく試して、確かな学びへ。',copy:'小さな検証を進めている段階のコンセプトページです。',steps:['試す条件を明確にする','結果と学びを整理する'],sub:['対象・期間・成功条件を決める','次の判断に使える記録を残す']},growth:{title:'実装に向けて、必要な力を集める。',copy:'実装・展開を検討している段階のコンセプトページです。',steps:['実現に必要な条件を整理する','協力できる相手と話す'],sub:['費用・技術・運用の課題を洗い出す','役割と進め方をすり合わせる']}};
 function clean(value){return String(value||'').replace(/[\r\n\t ]+/g,' ').trim()}
 function text(id,value){$(id).textContent=value}
@@ -100,8 +135,10 @@ function update(){
  var cta=$('idea-cta').value;var stage=stages[$('idea-stage').value]||stages.concept;
  var brand=title.replace(/[。！!？?].*$/,'').slice(0,18)||'IDEA PROJECT';
  text('p-brand',brand);text('p-title',title);text('p-description',description);text('p-cta',cta);text('p-nav-cta','企画に参加する ↗');text('p-feature1-title','届けたい相手');text('p-feature1',audience+'に向けた、新しい選択肢。');text('p-feature2-title','届けたい価値');text('p-feature2',benefit+'。');text('p-feature3-title','次の一歩');text('p-feature3',cta+'。');text('p-stage-title',stage.title);text('p-bottom-title','このアイデアを、一緒に育てませんか？');text('p-bottom-copy',stage.copy);text('p-bottom-cta',cta+' ↗');
-text('p-art-label',brand.toUpperCase().slice(0,26));text('preview-status','プレビューを更新しました — 企画名・価値・次の一歩を反映中');
-var t=themes[theme],site=$('site-preview');site.style.setProperty('--accent',t.accent);site.style.setProperty('--accent2',t.accent2);site.style.setProperty('--hero-bg',t.hero);site.style.setProperty('--art-bg',t.art);
+text('p-art-label',brand.toUpperCase().slice(0,26));
+$('p-art-graphic').innerHTML='<div class="flow-node"><span>01</span><b>'+esc(audience.slice(0,22)||'届けたい相手')+'</b></div><div class="flow-arrow" aria-hidden="true">↓</div><div class="flow-node flow-node-main"><span>02</span><b>'+esc(brand.slice(0,22)||'アイデア')+'</b></div><div class="flow-arrow" aria-hidden="true">↓</div><div class="flow-node flow-node-end"><span>03</span><b>'+esc(benefit.slice(0,24)||'生み出す価値')+'</b></div>';
+text('preview-status','ライブプレビュー更新済み — 入力内容を企画ページへ反映しました');
+var t=themes[theme],site=$('site-preview');site.style.setProperty('--accent',t.accent);site.style.setProperty('--accent2',t.accent2);site.style.setProperty('--hero-bg',t.hero);site.style.setProperty('--art-bg',t.art);site.style.setProperty('--site-ink',t.ink||'#18352b');
 var proof=document.querySelectorAll('.proof-point');proof[0].querySelector('strong').textContent=stage.steps[0];proof[0].querySelector('span').textContent=stage.sub[0];proof[1].querySelector('strong').textContent=stage.steps[1];proof[1].querySelector('span').textContent=stage.sub[1];
 }
 $('generate').addEventListener('click',update);

@@ -87,6 +87,24 @@
     @media(max-width:800px){.hero{grid-template-columns:1fr;gap:25px;padding-top:48px}.steps{grid-template-columns:1fr}.listing{grid-template-columns:1fr}.trust{grid-template-columns:1fr 1fr}.closing-inner{align-items:flex-start;flex-direction:column}}
     @media(max-width:560px){.wrap{width:calc(100% - 32px)}header{min-height:66px}nav a:not(.nav-cta){display:none}.hero{padding:38px 0 32px}h1{font-size:clamp(42px,12vw,60px)}.hero p{font-size:14px}.pipeline{grid-template-columns:1fr 20px 1fr;gap:5px}.idea-note,.preview{padding:10px;min-height:145px}.idea-note strong{font-size:17px}.mock-title{font-size:14px}.art-top{font-size:10px}.audience-strip .wrap{justify-content:flex-start}section{padding:58px 0}.two-cards{grid-template-columns:1fr}.aud-card{padding:22px}.trust{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}.closing{padding:48px 0}.btn{width:100%;white-space:normal;text-align:center}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+  
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}
+    .price-card{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:24px;display:flex;flex-direction:column}
+    .price-card.featured{border:2px solid var(--ink);box-shadow:7px 7px 0 var(--lime)}
+    .price-card .price-kicker{font-size:10px;font-weight:950;letter-spacing:1px;color:#62665a}
+    .price-card h3{font-size:21px;margin:10px 0 4px}
+    .price{font-size:28px;font-weight:950;letter-spacing:-1px;margin:8px 0}
+    .price small{font-size:12px;letter-spacing:0;font-weight:600}
+    .price-card p,.price-card li{font-size:13px;color:#55594e}
+    .price-card ul{padding-left:18px;margin:8px 0 0}
+    .price-note{margin-top:22px;padding:16px 18px;border-left:4px solid var(--orange);background:#fff4ec;font-size:13px;color:#484a40}
+    .faq-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+    .faq-list article{border:1px solid var(--line);border-radius:7px;background:var(--white);padding:20px}
+    .faq-list h3{font-size:16px;margin:0 0 8px}.faq-list p{font-size:13px;color:#55594e;margin:0}
+    .disclaimer{background:#eceae0;border:1px solid #d9d7ca;border-radius:8px;padding:22px;margin-top:24px}
+    .disclaimer h3{font-size:16px;margin:0 0 8px}.disclaimer ul{padding-left:20px;margin:8px 0}.disclaimer li,.disclaimer p{font-size:12px;color:#4f5349}
+    @media(max-width:800px){.pricing-grid{grid-template-columns:1fr}.faq-list{grid-template-columns:1fr}}
+
   </style>
 </head>
 <body>
@@ -95,7 +113,7 @@
       <header>
         <a class="logo" href="#top" aria-label="PON トップ"><span class="mark" aria-hidden="true">P</span>PON</a>
         <nav aria-label="メインナビゲーション">
-          <a href="#how">仕組み</a><a href="#for-who">誰のため？</a><a href="#trust">安心への設計</a><a class="nav-cta" href="#status">開発状況 ↗</a>
+          <a href="#how">仕組み</a><a href="#for-who">誰のため？</a><a href="#pricing">料金案</a><a href="#trust">安心への設計</a><a class="nav-cta" href="#status">開発状況 ↗</a>
         </nav>
       </header>
       <main id="top">
@@ -199,6 +217,69 @@
         <article class="step"><b>…</b><h3>検証しながら開発</h3><p>費用、信頼、安全、実現可能性を確認して段階的に進める。</p></article>
       </div>
       <p class="small">現時点で出資募集や協業の申し込みは受け付けていません。掲載イメージは説明用の概念例です。</p>
+    </div>
+  </section>
+
+
+  <section id="pricing">
+    <div class="wrap">
+      <div class="eyebrow">PRICING / CONCEPT DRAFT</div>
+      <h2>まずは無料で参加。<br>必要な機能だけ、選べる形へ。</h2>
+      <p class="lead">料金はまだ確定していません。利用開始のハードルを下げつつ、可視化の生成コストや運営費をまかなえる形を検証しています。以下は正式価格ではなく、検討中の料金設計案です。</p>
+      <div class="pricing-grid">
+        <article class="price-card">
+          <div class="price-kicker">01 / DISCOVER</div><h3>閲覧・アイデア探し</h3><div class="price">無料 <small>／検討案</small></div>
+          <p>まずは幅広いアイデアに触れ、可能性を探せる入口。</p>
+          <ul><li>公開アイデアの閲覧</li><li>公開プロフィール・募集条件の確認</li><li>検索・絞り込み機能は開発時に範囲を決定</li></ul>
+        </article>
+        <article class="price-card featured">
+          <div class="price-kicker">02 / SHARE</div><h3>投稿・ビジュアル化</h3><div class="price">基本無料＋追加有料を検討</div>
+          <p>文章で投稿し、必要に応じてLPや画面イメージを添える。</p>
+          <ul><li>基本投稿は無料を軸に検討</li><li>ビジュアル作成は無料回数・広告協力枠などを検証</li><li>追加生成は実行前に料金を明示する方針</li></ul>
+        </article>
+        <article class="price-card">
+          <div class="price-kicker">03 / DEEPER DETAILS</div><h3>限定・有料コンテンツ</h3><div class="price">投稿者が設定する案</div>
+          <p>概要は広く公開し、詳細資料や追加情報は条件付きで開示する構想。</p>
+          <ul><li>無料公開と限定公開を使い分ける</li><li>有料設定を導入する場合は購入条件を事前表示</li><li>手数料・売上受取条件は未決定</li></ul>
+        </article>
+      </div>
+      <div class="price-note"><strong>大事な前提：</strong>上記は料金設計のたたき台です。月額料金・単価・広告の有無・手数料は決まっていません。現在、決済・有料コンテンツ販売・出資募集・資金移動は稼働しておらず、支払いを求めることもありません。</div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="eyebrow">QUESTIONS & ANSWERS</div>
+      <h2>使い始める前に、知っておきたいこと。</h2>
+      <div class="faq-list">
+        <article><h3>アイデアが未完成でも投稿できる？</h3><p>構想段階から扱う方針です。文章だけで始め、ビジュアルは必要に応じて追加する体験を目指しています。実際の投稿機能はまだ準備中です。</p></article>
+        <article><h3>ビジュアルは完成品？</h3><p>いいえ。生成・掲載される画面案は構想を伝えるための試作品です。動作、需要、費用、収益性や実現可能性を保証するものではありません。</p></article>
+        <article><h3>アイデアを盗用されない？</h3><p>完全な盗用防止は保証できません。公開前に機密情報や個人情報を含めないこと、公開範囲を慎重に選ぶことを推奨します。権利保護や通報対応の詳細は正式提供前に整備が必要です。</p></article>
+        <article><h3>出資や投資を申し込める？</h3><p>現時点ではできません。将来の資金関連機能は、取引形態ごとに法令・許認可・契約・税務等を確認したうえで判断します。</p></article>
+        <article><h3>本人確認はどうする？</h3><p>協議やマッチングに進む際に外部本人確認サービスを使い、PONでは本人確認書類画像を保管しない設計を検討しています。これは現時点の方針案で、実装済みではありません。</p></article>
+        <article><h3>いつ、いくらで使える？</h3><p>提供開始日・料金ともに未定です。価格や機能が決まった場合は、利用前に内容を明示する前提です。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="disclaimer">
+    <div class="wrap">
+      <div class="eyebrow">IMPORTANT INFORMATION</div>
+      <h2>ご利用にあたっての注意事項</h2>
+      <p class="lead">正式サービス開始前に、利用規約・プライバシーポリシー・取引条件などを別途整備する必要があります。以下は現段階の説明であり、正式な契約条項や法律上の助言ではありません。</p>
+      <div class="disclaimer">
+        <h3>コンセプト・試作に関する免責</h3>
+        <ul>
+          <li>このサイトとデモは構想説明用です。実際の投稿、AI生成、決済、販売、本人確認、出資募集、マッチングは提供していません。</li>
+          <li>サンプル投稿、画面、金額、事業案は説明用の例であり、実在の募集・実績・収益予測ではありません。</li>
+          <li>将来の生成物や利用者の投稿には誤り・不足が含まれる可能性があります。内容の正確性、適法性、第三者の権利非侵害、特定の成果を保証するものではありません。</li>
+          <li>アイデアや資料の公開により、第三者に閲覧・模倣される可能性があります。営業秘密、個人情報、未公開の重要情報を安易に掲載しないでください。</li>
+          <li>本人確認済み表示を導入した場合でも、本人の能力、信用、投稿内容、事業の安全性や成功を保証するものではありません。</li>
+          <li>出資・融資・寄付・スポンサー・共同事業は法的性質が異なります。将来機能を提供する場合は、対象取引の法令・許認可・契約・税務等を別途確認します。</li>
+          <li>正式サービスの提供時には、運営者情報、利用規約、プライバシーポリシー、料金・返金・解約条件、問い合わせ・通報窓口等を整備し、必要に応じて専門家の確認を受けます。</li>
+        </ul>
+        <p><strong>現状：</strong>開発初期段階。現時点で登録・購入・投資・協業の申し込みは受け付けていません。</p>
+      </div>
     </div>
   </section>
 

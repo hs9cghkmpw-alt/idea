@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: pon-mvp
+    runtime: static
+    buildCommand: npm install --prefix app/mvp --no-audit --no-fund && npm run build --prefix app/mvp
+    staticPublishPath: app/mvp/dist
+    envVars:
+      - key: VITE_SUPABASE_URL
+        sync: false
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false

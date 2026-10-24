@@ -154,7 +154,10 @@ async function loadIdeas() {
   message(feedMessage);
   renderIdeas();
 }
+let detailIdeaId = null;
+
 function openDetail(idea) {
+  detailIdeaId = idea.id;
   $('detail-title').textContent = idea.title;
   $('detail-meta').replaceChildren(
     safeText('span', 'tag', idea.category || 'その他'),
@@ -219,6 +222,10 @@ async function saveIdea(status) {
     if (!result.data) throw new Error('権限がないか、対象のアイデアが存在しません。');
     closeEditor();
     await loadIdeas();
+    if (id && detailIdeaId === id) {
+      const updatedIdea = ideas.find((item) => item.id === id);
+      if (updatedIdea) openDetail(updatedIdea);
+    }
     message(feedMessage, status === 'published' ? 'アイデアを保存しました。' : '下書きを保存しました。', 'success');
   } catch (error) {
     message(ideaMessage, '保存できませんでした。入力内容と DB の設定を確認してください。' + (import.meta.env.DEV ? ' (' + error.message + ')' : ''), 'error');
